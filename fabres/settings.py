@@ -30,6 +30,15 @@ if os.name == 'nt':
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+GEOS_LIBRARY_PATH = '/app/.heroku/vendor/lib/libgeos_c.so' if os.environ.get(
+    'ENV') == 'HEROKU' else os.getenv('GEOS_LIBRARY_PATH')
+GDAL_LIBRARY_PATH = '/app/.heroku/vendor/lib/libgdal.so' if os.environ.get(
+    'ENV') == 'HEROKU' else os.getenv('GDAL_LIBRARY_PATH')
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
