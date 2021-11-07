@@ -14,6 +14,7 @@ from pathlib import Path
 
 import os
 import dj_database_url
+import corsheaders
 
 if os.name == 'nt':
     import platform
@@ -65,7 +66,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'rest_framework',
     'visor',
-    # 'corsheaders'
+    'corsheaders'
 ]
 
 
@@ -73,6 +74,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -172,3 +174,5 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ORIGIN_ALLOW_ALL = True
