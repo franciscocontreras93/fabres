@@ -8,7 +8,7 @@ from visor.serializer import FabresSerializer as FS
 
 from rest_framework.parsers import JSONParser
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
 
 from django.contrib.gis.geos import GEOSGeometry
 
@@ -33,10 +33,10 @@ def re_distritos(request,distrito=False):
         feat = model.objects.filter(distrito=dist)
         result = FS.PublicSerializer(feat)
         
-    # return HttpResponse(result, content_type='application/json')
-    return HttpResponse('Hola Tilin')
+    return HttpResponse(result, content_type='application/json')
 
 @api_view(['GET'])
+@permission_classes(['permissions.AllowAny'])
 def re_ccpp(request , nom_ccpp=False):
     try:
         # nom_ccpp = 'CANAYRE' # ! UNCOMMENT TO DEBUG
