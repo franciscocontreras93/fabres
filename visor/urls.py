@@ -4,7 +4,7 @@ from django.conf.urls import url, re_path
 from . import views
 
 urlpatterns = [
-    re_path('', views.index, name='index'),
+    url('', views.index, name='index'),
     re_path('rest/fabres$', views.re_distritos, name='api'), # * EN DESARROLLO
     re_path('rest/query$', views.re_query, name='api'),
     re_path(r'rest/fabres/?distrito=(?P<distrito>[a-zA-z]+)$', views.re_distritos, name='distrito'),
