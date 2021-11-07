@@ -4,7 +4,7 @@ echo Updating and deploying the application to heroku
 echo =================================================
 git add .
 git commit -m 'auto update'
-git push orogin main
+git push origin main
 echo ==================================================
 echo               Updated Github repo
 echo ==================================================
