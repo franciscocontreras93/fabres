@@ -14,3 +14,4 @@ git push heroku main
 echo ==================================================
 echo                Process Finished
 echo ==================================================
+start https://fabres2.herokuapp.com/index

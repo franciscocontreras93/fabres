@@ -33,7 +33,8 @@ def re_distritos(request,distrito=False):
         feat = model.objects.filter(distrito=dist)
         result = FS.PublicSerializer(feat)
         
-    return HttpResponse(result, content_type='application/json')
+    # return HttpResponse(result, content_type='application/json')
+    return HttpResponse('Hola Tilin')
 
 @api_view(['GET'])
 def re_ccpp(request , nom_ccpp=False):
