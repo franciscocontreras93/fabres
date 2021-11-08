@@ -14,5 +14,5 @@ git push heroku main
 echo ==================================================
 echo                Process Finished
 echo ==================================================
-start https://fabres2.herokuapp.com/rest/fabres
+start https://fabres2.herokuapp.com
 
