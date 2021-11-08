@@ -11323,8 +11323,8 @@ header.masthead {
   overflow: hidden;
   padding-top: calc(7rem + 72px);
   padding-bottom: 7rem;
-  background-image: url('https://images.unsplash.com/photo-1460186136353-977e9d6085a1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80');
-  /* background: linear-gradient(0deg, #ff6a00 0%, #ee0979 100%); */
+  /* background-image: url('https://images.unsplash.com/photo-1460186136353-977e9d6085a1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80'); */
+  background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(0, 0, 0, 1) 78%);
   background: rgba(#141619,0.75);
   background-repeat: no-repeat;
   background-position: center center;
