@@ -49,7 +49,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-d6!_2(nall^+*0pal+et^%
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
@@ -86,7 +86,7 @@ ROOT_URLCONF = 'fabres.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,28 +105,28 @@ WSGI_APPLICATION = 'fabres.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'HOST': 'ec2-3-214-121-14.compute-1.amazonaws.com',
-        'PORT' : '5432',
-        'NAME': 'd6t8mab450ah7e',
-        'USER' : 'ubaxledfnaqxix',
-        'PASSWORD' : '705a885bd9edeb6845b17e57f6f4eaaf6e4c19ad31b1636290f808f2fe7dae5a'
-    }
-
-}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'HOST': 'localhost',
+#         'HOST': 'ec2-3-214-121-14.compute-1.amazonaws.com',
 #         'PORT' : '5432',
-#         'NAME': 'geodjango',
-#         'USER' : 'postgres',
-#         'PASSWORD' : '23826405'
+#         'NAME': 'd6t8mab450ah7e',
+#         'USER' : 'ubaxledfnaqxix',
+#         'PASSWORD' : '705a885bd9edeb6845b17e57f6f4eaaf6e4c19ad31b1636290f808f2fe7dae5a'
 #     }
 
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'HOST': 'localhost',
+        'PORT' : '5432',
+        'NAME': 'geodjango',
+        'USER' : 'postgres',
+        'PASSWORD' : '23826405'
+    }
+
+}
 
 # db_from_env = dj_database_url.config(conn_max_age=500)
 # DATABASES['default'].update(db_from_env)
@@ -168,6 +168,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static/"),
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
