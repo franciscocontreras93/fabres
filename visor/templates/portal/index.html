@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Geoportal</title>
+  <title>Geoportal | Escenario de Riesgo COVID-19</title>
   <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
   <link href="{% static 'css/portal/leaflet.css'%}" rel="stylesheet" />
   <link href="{% static 'css/portal/leaflet.min.css'%}" rel="stylesheet" />
@@ -66,7 +66,7 @@
     map.addLayer(OpenStreetMap_Mapnik)
     // POPUPS
     function pop_risk(feature, layer) {
-    var popupContent = `<table class="table-sm table-light table-bordered border-black">
+    var popupContent = `<table class="table-sm table-dark table-bordered border-white">
         <thead>
             <tr>
                 <th scope="col"> Manzana</th>
@@ -81,7 +81,7 @@
                 <td scope="row">${feature.properties.idmanzana}</td>
                 <td class="fw-bolder">${feature.properties.distrito}</td>
                 <td>${feature.properties.pob_total}</td>
-                <td rowspan="2">${feature.properties.n_riesgo}</td>
+                <td rowspan="2" class="">${feature.properties.n_riesgo}</td>
             </tr>
             <tr>
                 <th scope="row" colspan="3"> Centro Poblado: ${feature.properties.nom_ccpp}</th>

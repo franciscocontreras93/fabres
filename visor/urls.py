@@ -5,7 +5,7 @@ from visor import views,apiviews
 
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.portal, name='index'),
     path("geoportal/",views.portal, name="portal"),
     re_path('rest/fabres$', apiviews.re_distritos, name='api'), 
     re_path(r'rest/processing/buffer/?(?P<width>[0-9]+)$', apiviews.re_query, name='api'),
