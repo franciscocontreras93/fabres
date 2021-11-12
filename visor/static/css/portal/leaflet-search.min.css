@@ -20,17 +20,17 @@
 .leaflet-control-search .search-input {
     display: block;
     float: left;
-    background: rgba(0, 0, 0, .5);
+    background: rgba(255, 255, 255, .7);
     border: 1px solid #666;
     border-radius: 2px;
     height: 22px;
     padding: 0 20px 0 2px;
     margin: 4px 0 4px 4px;
-    color: #fff
+    color: #000
 }
 
 .leaflet-control-search.search-load .search-input {
-    background: url(../images/loader.gif) no-repeat center right
+    background: url(/static/css/portal/images/loader.gif) no-repeat center right
 }
 
 .leaflet-control-search.search-load .search-cancel {
@@ -44,7 +44,7 @@
     position: absolute;
     right: 28px;
     margin: 6px 0;
-    background: url(../images/search-icon.png) no-repeat 0 -46px;
+    background: url(/static/css/portal/images/search-icon.png) no-repeat 0 -46px;
     text-decoration: none;
     opacity: .8
 }
@@ -70,12 +70,12 @@
     float: left;
     width: 25px;
     height: 25px;
-    background: url(../images/png/search-location-solid.svg) no-repeat;
+    background: url(/static/css/portal/images/search-location-solid.svg) no-repeat;
     border-radius: 4px
 }
 
 .leaflet-control-search .search-button:hover {
-    background: url(../images/png/search-location-solid.svg) no-repeat #fafafa
+    background: url(/static/css/portal/images/search-location-solid.svg) no-repeat #fafafa
 }
 
 .leaflet-control-search .search-tooltip {

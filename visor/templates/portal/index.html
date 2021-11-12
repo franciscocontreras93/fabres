@@ -7,9 +7,12 @@
   <title>Geoportal</title>
   <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
   <link href="{% static 'css/portal/leaflet.css'%}" rel="stylesheet" />
+  <link href="{% static 'css/portal/leaflet.min.css'%}" rel="stylesheet" />
   <link href="{% static 'css/portal/L.Control.Locate.min.css'%}" rel="stylesheet" />
   <link rel="stylesheet" href="{% static 'css/portal/leaflet-control-credits.css' %}" />
   <link rel="stylesheet" href="{% static 'css/portal/leaflet-search.min.css' %}" />
+  <link href="{% static 'css/portal/main.css'%}" rel="stylesheet" />
+  <link href="{% static 'css/portal/fontawesome-all.min.css'%}" rel="stylesheet" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
@@ -30,6 +33,7 @@
 <script src="{% static 'js/portal/Autolinker.min.js' %}"></script>
 <script src="{% static 'js/portal/L.Control.Locate.min.js' %}"></script>
 <script src="{% static 'js/portal/leaflet-hash.js' %}"></script>
+<script src="{% static 'js/portal/leaflet-search.min.js' %}"></script>
 
 <script>
 
@@ -156,7 +160,6 @@
     map.getPane('dist_pane').style.zIndex = 400
     distritos = '{{data|safe}}'
     data = JSON.parse(distritos)
-    console.log(data)
     var distritos_layer = new L.geoJson(data, {
     attribution: '',
     interactive: true,
@@ -206,17 +209,18 @@
     }
 
     L.control.layers(basemaps,theme).addTo(map)
-    // var searchLayer = L.layerGroup().addTo(map);
-    // map.addControl(new L.Control.Search({
-    // url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
-    // jsonpParam: 'json_callback',
-    // propertyName: 'display_name',
-    // propertyLoc: ['lat','lon'],
-    // autoCollapse: true,
-    // autoType: false,
-    // minLength: 2
+    var searchLayer = L.layerGroup().addTo(map);
+    map.addControl(new L.Control.Search({
+    url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
+    jsonpParam: 'json_callback',
+    propertyName: 'display_name',
+    propertyLoc: ['lat','lon'],
+    autoCollapse: true,
+    autoType: false,
+    minLength: 2,
+    collapse: false
 
-    // }))
+    }))
 
 </script>
 </body>
