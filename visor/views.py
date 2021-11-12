@@ -1,14 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
+from django.core.serializers import serialize
 from visor.models import DistritosModel as model
+
 from visor.serializer import FabresSerializer as FS
-
-
-from rest_framework.parsers import JSONParser
-from rest_framework import status
-from rest_framework.decorators import api_view,permission_classes
-
-from django.contrib.gis.geos import GEOSGeometry
 
 # Create your views here.
 
@@ -16,6 +11,17 @@ from django.contrib.gis.geos import GEOSGeometry
 def index(request):
 
     return render(request,r'home/index.html',{
+
+    })
+def portal(request):
+
+    dist = model.objects.all()
+    # pol = dist.mpoly.geojson
+    
+    data = FS.PrivateSerializer(dist)
+
+    return render(request,r'portal/index.html',{
+        'data': data
 
     })
 

@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geoportal</title>
+  <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
+  <link href="{% static 'css/portal/leaflet.css'%}" rel="stylesheet" />
+  <link href="{% static 'css/portal/L.Control.Locate.min.css'%}" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/portal/leaflet-control-credits.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/portal/leaflet-search.min.css' %}" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</head>
+<style>
+    #map {
+        height: 100vh;
+        width: 100vw;
+    }
+</style>
+<body>
+    <div id="map"></div>
+
+<!-- <script src="{% static 'js/portal/leaflet.js' %}"></script> -->
+
+<script src="{% static 'data/data.js' %}"></script>
+<script src="{% static 'js/portal/leaflet.js' %}"></script>
+<script src="{% static 'js/portal/Autolinker.min.js' %}"></script>
+<script src="{% static 'js/portal/L.Control.Locate.min.js' %}"></script>
+<script src="{% static 'js/portal/leaflet-hash.js' %}"></script>
+
+<script>
+
+    var map = L.map('map').setView([-12.939947,-74.247891], 13);
+    map.attributionControl.setPrefix(
+    `Desarrollado por: <a href="https://www.linkedin.com/in/geofrancisco/" title="GeoSIG" "target=" _blank">Francisco Contreras &middot Rafael Vasquez </a>`);
+    L.control.locate({
+    locateOptions: {
+    maxZoom: 19
+    }
+    }).addTo(map);
+    map.createPane('pane_baseMap');
+    map.getPane('pane_baseMap').style.zIndex = 0;
+    var baseMapsatelital = L.tileLayer(
+    'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+    pane: 'pane_baseMap',
+    attribution: '&copy; <a href="">Google Earth</a>',
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+    opacity: 1.0,
+    minZoom: 1,
+    maxZoom: 28,
+    minNativeZoom: 0,
+    maxNativeZoom: 20
+    });
+    var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    map.addLayer(OpenStreetMap_Mapnik)
+    // POPUPS
+    function pop_risk(feature, layer) {
+    var popupContent = `<table class="table-sm table-light table-bordered border-black">
+        <thead>
+            <tr>
+                <th scope="col"> Manzana</th>
+                <th scope="col">Distrito</th>
+                <th scope="col">Poblacion</th>
+                <th scope="col">Riesgo</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row">${feature.properties.idmanzana}</td>
+                <td class="fw-bolder">${feature.properties.distrito}</td>
+                <td>${feature.properties.pob_total}</td>
+                <td rowspan="2">${feature.properties.n_riesgo}</td>
+            </tr>
+            <tr>
+                <th scope="row" colspan="3"> Centro Poblado: ${feature.properties.nom_ccpp}</th>
+
+            </tr>
+        <tbody>
+    </table>
+    `;
+    layer.bindPopup(popupContent, {
+    maxHeight: 1000,
+    maxWidth: 1000,
+
+    });
+    }
+
+    function risk_stile(feature){
+    switch (String(feature.properties['n_riesgo'])) {
+    case "Muy Alto":
+    return {
+    color: '#d7191c',
+    fillOpacity: '0.60',
+    stroke: ''
+    };
+    case "Alto":
+    return {
+    color: '#fe9000',
+    fillOpacity: '0.60',
+    stroke: ''
+    };
+    case "Medio":
+    return {
+    color: '#ffe900',
+    fillOpacity: '0.60',
+    stroke: ''
+    };
+    case "Bajo":
+    return {
+    color: '#1a9641',
+    fillOpacity: '0.60',
+    stroke: ''
+    };
+    }
+    }
+
+    function riskStile(feature) {
+    switch (String(feature.properties['n_riesgo'])) {
+    case "Muy Alto":
+    return {
+    color: '#d7191c',
+    fillOpacity: '0.60',
+    stroke: ''
+    };
+    case "Alto":
+    return {
+    color: '#fe9000',
+    fillOpacity: '0.60',
+    stroke: ''
+    };
+    case "Medio":
+    return {
+    color: '#ffe900',
+    fillOpacity: '0.60',
+    stroke: ''
+    };
+    case "Bajo":
+    return {
+    color: '#1a9641',
+    fillOpacity: '0.60',
+    stroke: ''
+    };
+    }
+    }
+
+    // CREATE LAYERPANE
+    map.createPane('dist_pane');
+    map.getPane('dist_pane').style.zIndex = 400
+    distritos = '{{data|safe}}'
+    data = JSON.parse(distritos)
+    console.log(data)
+    var distritos_layer = new L.geoJson(data, {
+    attribution: '',
+    interactive: true,
+    onEachFeature: pop_risk,
+    pane: 'dist_pane',
+    dataVar: 'distritos',
+    layerName: 'Escenario de Riesgos',
+    style: function(feature) {
+    switch (String(feature.properties['n_riesgo'])) {
+    case "Muy Alto":
+    return {
+    color: '#d7191c',
+    fillOpacity: '0.60',
+    stroke: ''
+    };
+    case "Alto":
+    return {
+    color: '#fe9000',
+    fillOpacity: '0.60',
+    stroke: ''
+    };
+    case "Medio":
+    return {
+    color: '#ffe900',
+    fillOpacity: '0.60',
+    stroke: ''
+    };
+    case "Bajo":
+    return {
+    color: '#1a9641',
+    fillOpacity: '0.60',
+    stroke: ''
+    };
+    }
+    }
+
+
+    }).addTo(map)
+
+    var basemaps = {
+    "Google Earth: ": baseMapsatelital,
+    "OpenStreeMaps: ": OpenStreetMap_Mapnik
+    };
+
+    var theme = {
+    "Escenario Riesgo Covid: ": distritos_layer
+    }
+
+    L.control.layers(basemaps,theme).addTo(map)
+    // var searchLayer = L.layerGroup().addTo(map);
+    // map.addControl(new L.Control.Search({
+    // url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
+    // jsonpParam: 'json_callback',
+    // propertyName: 'display_name',
+    // propertyLoc: ['lat','lon'],
+    // autoCollapse: true,
+    // autoType: false,
+    // minLength: 2
+
+    // }))
+
+</script>
+</body>
+</html>

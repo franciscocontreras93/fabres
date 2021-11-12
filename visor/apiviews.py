@@ -1,5 +1,3 @@
-import json
-
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from visor.models import DistritosModel as model
