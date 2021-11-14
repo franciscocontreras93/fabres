@@ -94,7 +94,7 @@
 
         {% if user.is_authenticated %}
         <div class="small">Usuario:</div>
-        {{user.get_username}}
+        {{user.first_name}} {{user.last_name}}
         {% else %}
         <a href="{% url 'login' %}" class="nav-link">Iniciar Sesion</a>
         {% endif %}
