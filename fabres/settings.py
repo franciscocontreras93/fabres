@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'django.contrib.humanize',
     'rest_framework',
+    'widget_tweaks',
     'visor',
     'corsheaders'
 ]
