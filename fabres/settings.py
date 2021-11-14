@@ -49,7 +49,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-d6!_2(nall^+*0pal+et^%
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 
@@ -172,9 +172,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+
+# REALIZAR EL COLLECTSTATIC ANTES DE HACER EL DEPLOY
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static/"),
+    os.path.join(BASE_DIR, "visor/static/"),
 )
 
 # Default primary key field type
@@ -187,4 +190,4 @@ CORS_ORIGIN_ALLOW_ALL = True
 LOGIN_REDIRECT_URL = '/geoportal/'
 LOGOUT_REDIRECT_URL = 'login'
 
-LOGIN_URL = '/login'
+LOGIN_URL = 'login'

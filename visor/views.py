@@ -25,10 +25,7 @@ def index(request):
 def webmap(request):
 
     dist = model.objects.all()
-    
-    
     data = FS.PublicSerializer(dist)
-
     return render(request,r'dashboard/geoportal.html',{
         'data': data
 
