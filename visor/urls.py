@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls import url, re_path
 
 from visor import views,apiviews
@@ -6,6 +6,7 @@ from visor import views,apiviews
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('users/', include('django.contrib.auth.urls')),
     path("geoportal/",views.webmap, name="webmap"),
     path("geoportal/indicadores",views.indicadores, name="indicadores"),
     re_path('rest/fabres$', apiviews.re_distritos, name='api'), 

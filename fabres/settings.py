@@ -49,7 +49,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-d6!_2(nall^+*0pal+et^%
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 
@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'django.contrib.humanize',
     'rest_framework',
+    'widget_tweaks',
     'visor',
     'corsheaders'
 ]
@@ -182,3 +183,8 @@ STATICFILES_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_ALLOW_ALL = True
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/geoportal/'
+LOGOUT_REDIRECT_URL = 'login'
+
+LOGIN_URL = 'login'

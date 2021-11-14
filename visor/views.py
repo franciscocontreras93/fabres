@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
 from django.http import HttpResponse,JsonResponse
 from django.core.serializers import serialize
 from visor.models import DistritosModel as model
+from visor.forms import LoginForm
 from django.db.models import Sum
 
 from visor.serializer import FabresSerializer as FS
@@ -17,6 +20,8 @@ def index(request):
         'data': data
 
     })
+
+@login_required
 def webmap(request):
 
     dist = model.objects.all()
@@ -28,6 +33,9 @@ def webmap(request):
         'data': data
 
     })
+
+
+@login_required
 def indicadores(request):
     dist = model.objects.all()
     risk_very_high = model.objects.filter(n_riesgo='Muy Alto').aggregate(t=Sum('pob_total'))
@@ -46,9 +54,13 @@ def indicadores(request):
         'high': risk_high['t'],
         'medium': risk_medium['t'],
         'low': risk_low['t'],
+        'total': risk_low['t'] + risk_medium['t'] + risk_high['t'] + risk_very_high['t']
         
         
 
     })
+
+
+
 
 

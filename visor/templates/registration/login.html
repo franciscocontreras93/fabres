@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+<div class="card shadow border-0 rounded-lg mt-5">
+  <div class="card-header">
+    <!-- <h1 class="text-center font-weight-light my-4">GeoSIG Dashboard</h1> -->
+    <h3 class="text-center font-weight-light my-4">Iniciar Sesión</h3>
+  </div>
+  <div class="card-body">
+    <form ="login-form" method="post" action="{% url 'login' %}">
+      {% csrf_token %}  
+      <div class="form-floating align-content-between mb-3">
+      
+          {{form.username | add_class:"form-control"}}
+          <label for="id_username">Usuario</label>
+          
+      </div>
+      <div class="form-floating align-content-between mb-3">
+      
+      {{form.password | add_class:"form-control" }}
+      <label for="id_password">Contraseña</label>
+                
+      </div>
+      
+
+      <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+        
+         
+        <button class="btn btn-dark mx-auto" value="login" type="submit" >Login</button>
+      </div>
+    </form>
+  </div>
+  {% comment %} <div class="card-footer text-center py-3">
+    <div class="small">
+      <a href="register.html" class="text-black"
+        >Necesitas una cuenta? Registrate Ahora</a
+      >
+    </div>
+  </div> {% endcomment %}
+</div>
+
+
+{% endblock content %} 
+
+
+
+{% comment %} {% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+
+<div>
+  <td>{{ form.username.label_tag }}</td>
+  <td>{{ form.username }}</td>
+</div>
+<div>
+  <td>{{ form.password.label_tag }}</td>
+  <td>{{ form.password }}</td>
+</div>
+
+<div>
+  <input type="submit" value="login" />
+  <input type="hidden" name="next" value="{{ next }}" />
+</div>
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p><a href="{% url 'password_reset' %}">Lost password?</a></p> {% endcomment %}
+
+
+
+
+

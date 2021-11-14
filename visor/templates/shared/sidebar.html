@@ -8,14 +8,18 @@
                 </div>
                 Webmap
             </a>
+            {% if user.is_authenticated %}
+            
             <a class="nav-link" href="{% url 'indicadores' %}">
                 <div class="sb-nav-link-icon">
                     <i class="fas fa-chart-bar"></i>
                 </div>
                 Indicadores
             </a>
+            
+            {% endif %}
 
-            <div class="sb-sidenav-menu-heading">Interface</div>
+            {% comment %} <div class="sb-sidenav-menu-heading">Interface</div>
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
                 aria-expanded="false" aria-controls="collapseLayouts">
                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -68,7 +72,7 @@
                             <a class="nav-link" href="401.html">401 Page</a>
                             <a class="nav-link" href="404.html">404 Page</a>
                             <a class="nav-link" href="500.html">500 Page</a>
-                        </nav>
+                        </nav> {% endcomment %}
                         {% comment %}
                     </div>
                 </nav>
@@ -85,10 +89,16 @@
             {% endcomment %}
         </div>
     </div>
-    {% comment %}
+    
     <div class="sb-sidenav-footer">
-        <div class="small">Logged in as:</div>
-        Start Bootstrap
+
+        {% if user.is_authenticated %}
+        <div class="small">Usuario:</div>
+        {{user.get_username}}
+        {% else %}
+        <a href="{% url 'login' %}" class="nav-link">Iniciar Sesion</a>
+        {% endif %}
+
     </div>
-    {% endcomment %}
+    
 </nav>

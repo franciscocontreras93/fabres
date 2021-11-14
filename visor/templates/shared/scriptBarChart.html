@@ -7,8 +7,11 @@
     // Bar Chart Example
 
     const labels = ["Bajo", "Medio", "Alto", "Muy Alto"]
-    var ctx = document.getElementById("myBarChart");
-    var myLineChart = new Chart(ctx, {
+
+    
+    var cbar = document.getElementById("BarChart");
+    var cpie = document.getElementById("PieChart");
+    var BarChart = new Chart(cbar, {
         type: 'bar',
         data: {
             labels: labels,
@@ -20,6 +23,8 @@
             }],
         },
         options: {
+            responsive: true,
+            maintainAspectratio:false,
             scales: {
                 xAxes: [{
                     gridLines: {
@@ -42,7 +47,45 @@
             },
             legend: {
                 display: false
-            }
+            },
+            
+            
         }
     });
+    
+     var PieChart = new Chart(cpie, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Total Pob:",
+                backgroundColor: ["#198754","#ffc107","#ff6a00","#dc3545"],
+                borderColor: "rgba(2,117,216,1)",
+                data: ['{{low}}', '{{medium}}', '{{high}}', '{{very_high}}'],
+                borderWidth:2,
+                borderColor:'#fff',
+                 
+            }],
+            hoverOffset:20
+        },
+        options: {
+            responsive: true,
+            maintainAspectratio:false,
+           
+            legend: {
+                display: false
+            },
+            
+            
+        }
+    });
+    
+    
+    
+    const BarOptions = {
+        type: "doughnut",
+        data: ['{{low}}', '{{medium}}', '{{high}}', '{{very_high}}'],
+    }
+    
+
 </script>
