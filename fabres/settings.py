@@ -110,28 +110,28 @@ WSGI_APPLICATION = 'fabres.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'HOST': 'ec2-3-214-121-14.compute-1.amazonaws.com',
-#         'PORT' : '5432',
-#         'NAME': 'd6t8mab450ah7e',
-#         'USER' : 'ubaxledfnaqxix',
-#         'PASSWORD' : '705a885bd9edeb6845b17e57f6f4eaaf6e4c19ad31b1636290f808f2fe7dae5a'
-#     }
-
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'HOST': 'localhost',
+        'HOST': 'ec2-3-214-121-14.compute-1.amazonaws.com',
         'PORT' : '5432',
-        'NAME': 'geodjango',
-        'USER' : 'postgres',
-        'PASSWORD': '23826405' 
+        'NAME': 'd6t8mab450ah7e',
+        'USER' : 'ubaxledfnaqxix',
+        'PASSWORD' : '705a885bd9edeb6845b17e57f6f4eaaf6e4c19ad31b1636290f808f2fe7dae5a'
     }
 
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'HOST': 'localhost',
+#         'PORT' : '5432',
+#         'NAME': 'geodjango',
+#         'USER' : 'postgres',
+#         'PASSWORD': '23826405' 
+#     }
+
+# }
 
 # db_from_env = dj_database_url.config(conn_max_age=500)
 # DATABASES['default'].update(db_from_env)
