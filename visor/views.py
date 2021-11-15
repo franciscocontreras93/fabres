@@ -5,7 +5,7 @@ from django.http import HttpResponse,JsonResponse
 from django.core.serializers import serialize
 from visor.models import DistritosModel as model
 from visor.forms import LoginForm
-from django.db.models import Sum
+from django.db.models import Q,Sum
 
 from visor.serializer import FabresSerializer as FS
 
@@ -32,30 +32,63 @@ def webmap(request):
     })
 
 
+def sumPob(dq, value):
+    total = dq.filter(n_riesgo=value).aggregate(t=Sum('pob_total'))
+    op = total['t']
+    return op
+def pobTotal(dq):
+    total = dq.aggregate(t=Sum('pob_total'))
+    op = total['t']
+    return op
+
+
 @login_required
-def indicadores(request):
-    dist = model.objects.all()
-    risk_very_high = model.objects.filter(n_riesgo='Muy Alto').aggregate(t=Sum('pob_total'))
-    risk_high = model.objects.filter(n_riesgo='Alto').aggregate(t=Sum('pob_total'))
-    risk_medium = model.objects.filter(n_riesgo='Medio').aggregate(t=Sum('pob_total'))
-    risk_low = model.objects.filter(n_riesgo='Bajo').aggregate(t=Sum('pob_total'))
+def distIndicadores(request):
+    nombre = ''
+    query = request.GET.get('search')
+    print(type(query))
+    dq = model.objects.all()
+    print(len(dq))
+    # vh = sumPob(dq, 'Muy Alto')
+    # h = sumPob(dq, 'Alto')
+    # m = sumPob(dq, 'Medio')
+    # l = sumPob(dq, 'Bajo')
+    # total = pobTotal(dq)
+    # print(total)
+    if query != None:
+        dq = dq.filter(
+            Q(distrito=query.upper())
+            # Q(nom_ccpp=query.upper())
+        )
+        print(len(dq))
+        vh = sumPob(dq, 'Muy Alto')
+        h = sumPob(dq, 'Alto')
+        h = sumPob(dq, 'Medio')
+        h = sumPob(dq, 'Bajo')
+        total = pobTotal(dq)
+        nombre = query.capitalize()
+        pass
+    vh = sumPob(dq, 'Muy Alto')
+    h = sumPob(dq, 'Alto')
+    m = sumPob(dq, 'Medio')
+    l = sumPob(dq, 'Bajo')
+    total = pobTotal(dq)
+    print(total)
 
-
+    if len(dq) >= 1:
+        return render(request, r'dashboard/indicadores.html', {
+            'very_high': vh,
+            'high': h,
+            'medium': m,
+            'low': l,
+            'total': total,
+            'nombre': nombre
+        })
     
-    
-    data = FS.PublicSerializer(dist)
+    else:
+        return render(request, r'shared/noexiste.html', {
 
-    return render(request,r'dashboard/indicadores.html',{
-        'data': data,
-        'very_high': risk_very_high['t'],
-        'high': risk_high['t'],
-        'medium': risk_medium['t'],
-        'low': risk_low['t'],
-        'total': risk_low['t'] + risk_medium['t'] + risk_high['t'] + risk_very_high['t']
-        
-        
-
-    })
+        })
 
 
 

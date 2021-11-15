@@ -1,8 +1,13 @@
+{%url 'webmap' as webmap %}
+{%url 'indicadores' as indicadores %}
+
 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
     <div class="sb-sidenav-menu">
         <div class="nav">
+
+            <!-- <div class="sb-sidenav-menu-heading mx-auto"><h5>{{user.first_name}}</h5></div> -->
             <div class="sb-sidenav-menu-heading">Panel</div>
-            <a class="nav-link" href="{% url 'webmap' %}">
+            <a class="nav-link {% if request.path == webmap%}active{%endif%}" href="{% url 'webmap' %}">
                 <div class="sb-nav-link-icon">
                     <i class="fa fa-map" aria-hidden="true"></i>
                 </div>
@@ -10,31 +15,45 @@
             </a>
             {% if user.is_authenticated %}
             
-            <a class="nav-link" href="{% url 'indicadores' %}">
+            <a class="nav-link collapsed " href="#" data-bs-toggle="collapse" data-bs-target="#collapseStats"
+                aria-expanded="false" aria-controls="collapseStats">
                 <div class="sb-nav-link-icon">
-                    <i class="fas fa-chart-bar"></i>
+                <i class="fas fa-chart-bar"></i>
                 </div>
                 Indicadores
-            </a>
-            
-            {% endif %}
-
-            {% comment %} <div class="sb-sidenav-menu-heading">Interface</div>
-            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
-                aria-expanded="false" aria-controls="collapseLayouts">
-                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                Layouts
                 <div class="sb-sidenav-collapse-arrow">
                     <i class="fas fa-angle-down"></i>
                 </div>
             </a>
-            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+            <div class="collapse" id="collapseStats" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
-                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+
+                    <a class="nav-link {% if request.path == indicadores%}active{%endif%}"
+                        href="{% url 'indicadores' %}"><i class="fas fa-virus me-2"></i>Riesgo COVID-19</a>
                 </nav>
             </div>
-            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
+            
+            {% endif %}
+            
+            {% if user.is_authenticated and user.is_superuser %}
+            <div class="sb-sidenav-menu-heading">Administracion</div>
+            <a class="nav-link collapsed " href="#" data-bs-toggle="collapse" data-bs-target="#collapseUsers"
+                aria-expanded="false" aria-controls="collapseUsers">
+                <div class="sb-nav-link-icon"><i class="fa fa-users" aria-hidden="true"></i></div>
+                Usuarios
+                <div class="sb-sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                </div>
+            </a>
+            <div class="collapse" id="collapseUsers" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                
+                    <a class="nav-link" href="layout-static.html"><i class="fa fa-user-plus me-2" aria-hidden="true"></i>  Crear Usuario</a>
+                    <a class="nav-link" href="layout-sidenav-light.html"><i class="fas fa-user-edit me-2"></i> Modificar
+                        Usuario</a>
+                </nav>
+            </div>
+            {% comment %} <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                 aria-expanded="false" aria-controls="collapsePages">
                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                 Pages
@@ -72,7 +91,9 @@
                             <a class="nav-link" href="401.html">401 Page</a>
                             <a class="nav-link" href="404.html">404 Page</a>
                             <a class="nav-link" href="500.html">500 Page</a>
-                        </nav> {% endcomment %}
+                        </nav>             {% endcomment %}
+            {% endif %}
+            
                         {% comment %}
                     </div>
                 </nav>
@@ -95,10 +116,13 @@
         {% if user.is_authenticated %}
         <div class="small">Usuario:</div>
         {{user.first_name}} {{user.last_name}}
+        
+        
+        
         {% else %}
         <a href="{% url 'login' %}" class="nav-link">Iniciar Sesion</a>
         {% endif %}
 
-    </div>
+    </div> 
     
 </nav>

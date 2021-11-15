@@ -60,9 +60,9 @@ def re_query(request,width=False):
     #TODO GET USER POSITION WITH JAVASCRIPT FRAMEWORK 
     coords = '-74.26878,-12.90492'
     lCoords = coords.split(',')
-    long = lCoords[0]
+    lon = lCoords[0]
     lat = lCoords[1]
-    pnt = GEOSGeometry(f'POINT({long} {lat})')
+    pnt = GEOSGeometry(f'POINT({lon} {lat})')
     buffer = pnt.buffer(width/100000,quadsegs=8)
     feat = model.objects.filter(geom__intersects=buffer)
     result = FS.PublicSerializer(feat)

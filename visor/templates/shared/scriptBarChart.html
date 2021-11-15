@@ -6,11 +6,10 @@
 
     // Bar Chart Example
 
-    const labels = ["Bajo", "Medio", "Alto", "Muy Alto"]
-
-    
+    const labels = ["Bajo", "Medio", "Alto", "Muy Alto"]   
     var cbar = document.getElementById("BarChart");
     var cpie = document.getElementById("PieChart");
+
     var BarChart = new Chart(cbar, {
         type: 'bar',
         data: {
@@ -36,9 +35,11 @@
                 }],
                 yAxes: [{
                     ticks: {
-                        min: 0,
-                        max: 25000,
-                        maxTicksLimit: 10
+                        min: Math.min('{{low}}', '{{medium}}', '{{high}}',
+                        '{{very_high}}')-Math.ceil(Math.min('{{low}}', '{{medium}}', '{{high}}', '{{very_high}}')),
+                        max: Math.ceil(Math.max('{{low}}', '{{medium}}', '{{high}}', '{{very_high}}')/500)*500
+                        ,
+                        maxTicksLimit: 6
                     },
                     gridLines: {
                         display: true,
@@ -53,6 +54,17 @@
         }
     });
     
+    function retPercent(arg){
+        total = '{{total}}'
+        op = arg*100/total
+        // console.log(typeof(op))
+        return op.toFixed(2)
+    }
+
+    retPercent('{{low}}')
+
+    
+
      var PieChart = new Chart(cpie, {
         type: 'pie',
         data: {
@@ -61,7 +73,8 @@
                 label: "Total Pob:",
                 backgroundColor: ["#198754","#ffc107","#ff6a00","#dc3545"],
                 borderColor: "rgba(2,117,216,1)",
-                data: ['{{low}}', '{{medium}}', '{{high}}', '{{very_high}}'],
+                data: [retPercent('{{low}}'), retPercent('{{medium}}'), retPercent('{{high}}'),
+                retPercent('{{very_high}}')],
                 borderWidth:2,
                 borderColor:'#fff',
                  
@@ -73,15 +86,12 @@
             maintainAspectratio:false,
            
             legend: {
-                display: false
+                display: true
             },
             
             
         }
     });
-    
-    
-    
     const BarOptions = {
         type: "doughnut",
         data: ['{{low}}', '{{medium}}', '{{high}}', '{{very_high}}'],
