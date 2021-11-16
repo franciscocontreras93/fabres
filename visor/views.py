@@ -6,6 +6,7 @@ from django.core.serializers import serialize
 from visor.models import DistritosModel as model
 from visor.forms import LoginForm
 from django.db.models import Q,Sum
+from django.db.models.query import QuerySet
 
 from visor.serializer import FabresSerializer as FS
 
@@ -23,7 +24,12 @@ def index(request):
 
 @login_required
 def webmap(request):
-
+    # q = model.objects.all().query().group_by('distrito')
+    # q.group_by = ['distrito']
+    # data2 = QuerySet(query= q, model= model)
+    # print(len(data2))
+    # # for d in data2:
+    # #     print(d)
     dist = model.objects.all()
     data = FS.PublicSerializer(dist)
     return render(request,r'dashboard/geoportal.html',{
