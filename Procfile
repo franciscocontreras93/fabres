@@ -1,0 +1,1 @@
+web: gunicorn fabres.wsgi:application --log-file -

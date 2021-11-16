@@ -1,0 +1,101 @@
+<script>
+    // Set new default font family and font color to mimic Bootstrap's default styling
+    Chart.defaults.global.defaultFontFamily =
+        '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#292b2c';
+
+    // Bar Chart Example
+
+    const labels = ["Bajo", "Medio", "Alto", "Muy Alto"]   
+    var cbar = document.getElementById("BarChart");
+    var cpie = document.getElementById("PieChart");
+
+    var BarChart = new Chart(cbar, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Total Pob:",
+                backgroundColor: ["#198754","#ffc107","#ff6a00","#dc3545"],
+                borderColor: "rgba(2,117,216,1)",
+                data: ['{{low}}', '{{medium}}', '{{high}}', '{{very_high}}'],
+            }],
+        },
+        options: {
+            responsive: true,
+            maintainAspectratio:false,
+            scales: {
+                xAxes: [{
+                    gridLines: {
+                        display: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 6
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        min: Math.min('{{low}}', '{{medium}}', '{{high}}',
+                        '{{very_high}}')-Math.ceil(Math.min('{{low}}', '{{medium}}', '{{high}}', '{{very_high}}')),
+                        max: Math.ceil(Math.max('{{low}}', '{{medium}}', '{{high}}', '{{very_high}}')/500)*500
+                        ,
+                        maxTicksLimit: 6
+                    },
+                    gridLines: {
+                        display: true,
+                    }
+                }],
+            },
+            legend: {
+                display: false
+            },
+            
+            
+        }
+    });
+    
+    function retPercent(arg){
+        total = '{{total}}'
+        op = arg*100/total
+        // console.log(typeof(op))
+        return op.toFixed(2)
+    }
+
+    retPercent('{{low}}')
+
+    
+
+     var PieChart = new Chart(cpie, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Total Pob:",
+                backgroundColor: ["#198754","#ffc107","#ff6a00","#dc3545"],
+                borderColor: "rgba(2,117,216,1)",
+                data: [retPercent('{{low}}'), retPercent('{{medium}}'), retPercent('{{high}}'),
+                retPercent('{{very_high}}')],
+                borderWidth:2,
+                borderColor:'#fff',
+                 
+            }],
+            hoverOffset:20
+        },
+        options: {
+            responsive: true,
+            maintainAspectratio:false,
+           
+            legend: {
+                display: true
+            },
+            
+            
+        }
+    });
+    const BarOptions = {
+        type: "doughnut",
+        data: ['{{low}}', '{{medium}}', '{{high}}', '{{very_high}}'],
+    }
+    
+
+</script>

@@ -1,0 +1,45 @@
+{% url 'webmap' as webmap %}
+
+
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    {% comment %}
+    <!-- Navbar Brand--> {% endcomment %}
+    <p class="navbar-brand ps-3 disabled"> Dashboard | (demo) </p>
+    {% comment %}
+    <!-- Sidebar Toggle--> {% endcomment %}
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 " id="sidebarToggle" href="#!"><i
+            class="fas fa-bars"></i></button>
+    {% comment %}
+    <!-- Navbar Search--> {% endcomment %}
+    {% if request.get_full_path != webmap %}
+    
+    <form class="d-none d-md-inline-block form-inline ms-auto my-2 my-md-0"  method="get">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Buscar..." aria-label="Buscar..."
+                aria-describedby="btnNavbarSearch" name='search' />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    {%endif%}
+    {% comment %}
+    <!-- Navbar--> {% endcomment %}
+    <ul class="navbar-nav ms-auto me-3 me-sm-3">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                {% if user.is_authenticated %}
+                {% comment %} <li><a class="dropdown-item" href="#!">Settings</a></li>
+                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li>
+                    <hr class="dropdown-divider" /> {% endcomment %}
+                </li>
+                <li><a class="dropdown-item" href="{% url 'logout'%}"> <i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{%url 'login'%}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                {% endif %}
+
+            </ul>
+        </li>
+    </ul>
+</nav>

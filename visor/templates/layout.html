@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>{% block title %}{% endblock title %} | GRD-FABRES(demo)</title>
+    <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
+    <link href="{% static 'css/main.css'%}" rel="stylesheet" />
+    <link href="{% static 'css/portal/leaflet.css'%}" rel="stylesheet" />
+    <link href="{% static 'css/portal/L.Control.Locate.min.css'%}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/portal/leaflet-control-credits.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/portal/leaflet-search.min.css' %}" />
+    <link href="{% static 'css/portal/main.css'%}" rel="stylesheet" />
+    <link href="{% static 'css/portal/fontawesome-all.min.css'%}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="{% static 'css/dashboard/styles.css'%}" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous">
+    </script>
+</head>
+<style>
+    #map {
+        height: 100vh;
+        width: 100vw;
+    }
+</style>
+
+<body class="sb-nav-fixed">
+    {% include 'shared/navbar.html' %}
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            {% include 'shared/sidebar.html' %}
+        </div>
+        <div id="layoutSidenav_content">
+
+            <div class="container-fluid px-4">
+
+                <div id="" class="row">
+
+                    {% block content %}{% endblock %}
+                    
+                </div>
+                
+            </div>
+
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+    </script>
+    <script src="{% static 'js/dashboard/scripts.js'%}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'assets/demo/chart-area-demo.js'%}"></script>
+    <script src="{% static 'assets/demo/chart-bar-demo.js'%}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script src="{% static 'js/dashboard/chart-bar-demo.js'%}"></script>
+    <script src="{% static 'data/data.js' %}"></script>
+    <script src="{% static 'js/portal/leaflet.js' %}"></script>
+    <script src="{% static 'js/portal/Autolinker.min.js' %}"></script>
+    <script src="{% static 'js/portal/L.Control.Locate.min.js' %}"></script>
+    <script src="{% static 'js/portal/leaflet-hash.js' %}"></script>
+    <script src="{% static 'js/portal/leaflet-search.min.js' %}"></script>
+    {% include 'shared/scriptsMap.html' %}
+    {% include 'shared/scriptChart.html' %}
+
+
+</body>
+
+</html>
