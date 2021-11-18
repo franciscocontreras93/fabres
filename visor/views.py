@@ -12,34 +12,6 @@ from visor.serializer import FabresSerializer as FS
 import os
 
 # Create your views here.
-
-
-def index(request):
-    dist = model.objects.all()
-    data = FS.PublicSerializer(dist)
-    # print(os.environ.get('DJANGO_DEBUG'))
-
-    return render(request,r'home/index.html',{
-        'data': data
-
-    })
-
-@login_required
-def webmap(request):
-    # q = model.objects.all().query().group_by('distrito')
-    # q.group_by = ['distrito']
-    # data2 = QuerySet(query= q, model= model)
-    # print(len(data2))
-    # # for d in data2:
-    # #     print(d)
-    dist = model.objects.all()
-    data = FS.PublicSerializer(dist)
-    return render(request,r'dashboard/geoportal.html',{
-        'data': data
-
-    })
-
-
 def sumPob(dq, value):
     total = dq.filter(n_riesgo=value).aggregate(t=Sum('pob_total'))
     op = total['t']
@@ -50,19 +22,102 @@ def pobTotal(dq):
     return op
 
 
+
+
+def index(request):
+    dist = model.objects.all()
+    data = FS.PublicSerializer(dist)
+
+    
+
+
+
+
+
+
+
+    return render(request,r'home/index.html',{
+        'data': data
+
+    })
+
+@login_required
+def webmap(request):
+    nombre = ''
+    query = request.GET.get('search')
+    print(type(query))
+    dq = model.objects.all()
+    data = FS.PublicSerializer(dq)
+    if query != None:
+        dq = dq.filter(
+            Q(distrito__icontains=query))
+            # Q(nom_ccpp=query.upper())
+        data = FS.PublicSerializer(dq)
+
+        print(len(dq))
+        vh = sumPob(dq, 'Muy Alto')
+        h = sumPob(dq, 'Alto')
+        h = sumPob(dq, 'Medio')
+        h = sumPob(dq, 'Bajo')
+        total = pobTotal(dq)
+        nombre = query.capitalize()
+        pass
+    vh = sumPob(dq, 'Muy Alto')
+    h = sumPob(dq, 'Alto')
+    m = sumPob(dq, 'Medio')
+    l = sumPob(dq, 'Bajo')
+    total = pobTotal(dq)
+    print(total)
+
+    if len(dq) >= 1:
+        return render(request, r'dashboard/geoportal.html', {
+            'data': data,
+            'very_high': vh,
+            'high': h,
+            'medium': m,
+            'low': l,
+            'total': total,
+            'nombre': nombre
+        })
+    
+    else:
+        return render(request, r'shared/noexiste.html', {
+
+        })
+
+
+    # dist = model.objects.all()
+    # data = FS.PublicSerializer(dist)
+    
+    # data2 = model.objects.filter(distrito__icontains=request)
+
+    # vh = sumPob(dist, 'Muy Alto')
+    # h = sumPob(dist, 'Alto')
+    # m = sumPob(dist, 'Medio')
+    # l = sumPob(dist, 'Bajo')
+    # total = pobTotal(dist)
+    
+    
+    # return render(request,r'dashboard/geoportal.html',{
+    #     'data': data,
+    #     'very_high': vh,
+    #     'high': h,
+    #     'medium': m,
+    #     'low': l,
+    #     'total': total,
+    #     # 'nombre': nombre
+
+    # })
+
+
+
+
 @login_required
 def distIndicadores(request):
     nombre = ''
     query = request.GET.get('search')
     print(type(query))
     dq = model.objects.all()
-    print(len(dq))
-    # vh = sumPob(dq, 'Muy Alto')
-    # h = sumPob(dq, 'Alto')
-    # m = sumPob(dq, 'Medio')
-    # l = sumPob(dq, 'Bajo')
-    # total = pobTotal(dq)
-    # print(total)
     if query != None:
         dq = dq.filter(
             Q(distrito=query.upper())

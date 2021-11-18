@@ -1,0 +1,110 @@
+<div id="sidebar" class="leaflet-sidebar collapsed">
+    <!-- Nav tabs -->
+    <div class="leaflet-sidebar-tabs">
+        <ul role="tablist">
+            <li>
+                <a href="#risk" role="tab"><i class="fas fa-virus"></i></a>
+            </li>
+            <li>
+                <a href="#density" role="tab"><i class="fas fa-users"></i></i></a>
+            </li>
+            <li class="">
+                <a href="#nbi" role="tab"><i class="fas fa-hand-holding-water"></i></a>
+            </li>
+            <li class="">
+                <a href="#hazard" role="tab"><i class="fas fa-biohazard"></i></a>
+            </li>
+            <li class="">
+                <a href="#3059" role="tab"><i class="fas fa-walking"></i></a>
+            </li>
+            <li class="">
+                <a href="#60" role="tab"><i class="fas fa-blind"></i></a>
+            </li>
+            <li class="">
+                <a href="#public" role="tab"><i class="fas fa-store"></i></a>
+            </li>
+        </ul>
+
+        {% comment %} <ul role="tablist">
+            <li>
+                <a href="//github.com/nickpeihl/leaflet-sidebar-v2"><i class="fab fa-github-alt"
+                        aria-hidden="true"></i></a>
+            </li>
+        </ul> {% endcomment %}
+    </div>
+
+    <!-- Tab panes -->
+    <div class="leaflet-sidebar-content" id="panel-content">
+        <div class="leaflet-sidebar-pane" id="risk">
+            <h1 class="leaflet-sidebar-header">
+                Riesgo de Contagio COVID-19
+                <span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span>
+            </h1>
+            
+
+            <div class="container-fluid p-2">
+                <div class="d-flex">
+                    <div class="flex-row">
+                        <!-- <h3 class="fw-bolder"> TITULO</h3> -->
+                        <!-- <form class="d-none d-md-inline-block form-inline ms-auto my-2 my-md-0" method="get">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Buscar..." aria-label="Buscar..."
+                                    aria-describedby="btnNavbarSearch" name='search' />
+                                <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i
+                                        class="fas fa-search"></i></button>
+                            </div>
+                        </form> -->
+                        
+                    </div>
+                </div>
+
+                <div class="card shadow mt-3">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar me-2"> </i>Indicadores
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body"><canvas id="BarChart" width="100%" height="40"></canvas></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="leaflet-sidebar-pane" id="density">
+            <h1 class="leaflet-sidebar-header">
+                Densidad Poblacional
+                <span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span>
+            </h1>
+            
+
+            <div class="container-fluid p-2">
+                <div class="d-flex">
+                    <div class="flex-row">
+                        <!-- <h3 class="fw-bolder"> TITULO</h3> -->
+                        <!-- <form class="d-none d-md-inline-block form-inline ms-auto my-2 my-md-0" method="get">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Buscar..." aria-label="Buscar..."
+                                    aria-describedby="btnNavbarSearch" name='search' />
+                                <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i
+                                        class="fas fa-search"></i></button>
+                            </div>
+                        </form> -->
+                        
+                    </div>
+                </div>
+
+                <div class="card shadow mt-3">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar me-2"> </i>Indicadores
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body"><canvas id="BarChart" width="100%" height="40"></canvas></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

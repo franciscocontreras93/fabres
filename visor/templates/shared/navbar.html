@@ -11,16 +11,21 @@
             class="fas fa-bars"></i></button>
     {% comment %}
     <!-- Navbar Search--> {% endcomment %}
-    {% if request.get_full_path != webmap %}
     
-    <form class="d-none d-md-inline-block form-inline ms-auto my-2 my-md-0"  method="get">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="Buscar..." aria-label="Buscar..."
+    <form class="ms-auto" method="get">
+        <div class="">
+            <input class="form-search-sidebar" style="
+                            background-color: transparent; 
+                            width: 300px;
+                            height: 35px;
+                            border: none;
+                            color: #fff;
+                            " type="text" placeholder="Buscar Distrito..." aria-label="Buscar Distrito..."
                 aria-describedby="btnNavbarSearch" name='search' />
-            <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
+            <button class="btn btn-dark" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
         </div>
     </form>
-    {%endif%}
+   
     {% comment %}
     <!-- Navbar--> {% endcomment %}
     <ul class="navbar-nav ms-auto me-3 me-sm-3">

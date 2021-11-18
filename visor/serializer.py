@@ -2,6 +2,13 @@ from django.core.serializers import serialize
 
 class FabresSerializer():
     
+    def BaseSerializer(queryset): 
+        fieldsBase = [
+            'distrito',
+            'geom'
+        ]
+        return serialize('geojson', queryset, fields=(fieldsBase))
+
     def PublicSerializer(queryset):
         fieldsPublic = ['idmanzana',
                         'departamen',

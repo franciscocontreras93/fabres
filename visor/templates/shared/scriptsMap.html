@@ -1,5 +1,6 @@
 <script>
     var map = L.map('map').setView([-12.939947, -74.247891], 13);
+    
     map.attributionControl.setPrefix(
     `Desarrollado por: <a href="https://www.linkedin.com/in/geofrancisco/" title="GeoSIG" "target=" _blank">Francisco
         Contreras &middot Rafael Vasquez </a>`
@@ -25,7 +26,7 @@
     var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
+    }).addTo(map);
 
     // map.addLayer(OpenStreetMap_Mapnik)
     // POPUPS
@@ -66,6 +67,7 @@
     map.createPane('dist_pane');
     map.getPane('dist_pane').style.zIndex = 400
     distritos = '{{data|safe}}'
+    dist = '{{data2|safe}}'
 
     data = JSON.parse(distritos)
 
@@ -107,6 +109,10 @@
 
 
     }).addTo(map)
+    
+    map.fitBounds(covid_riesgo_lyr.getBounds());
+    
+    
     var dens_pob_lyr = new L.geoJson(data, {
     attribution: '',
     interactive: true,
@@ -462,4 +468,12 @@
 
     // }))
 
+
+    var sidebar = L.control.sidebar({ container: 'sidebar', position:'right'}).addTo(map);
+    
+
+    console.log(covid_riesgo_lyr.getBounds())
+
+
+    
 </script>
