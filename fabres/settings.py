@@ -49,9 +49,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-d6!_2(nall^+*0pal+et^%
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-LOCAL = False
+LOCAL = True
 
 
 
@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'widget_tweaks',
     'visor',
+    'homepage',
     'corsheaders'
 ]
 
@@ -94,8 +95,9 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            'templates',
-            'templates/dashboard'
+            'visor/templates',
+            'templates/dashboard',
+            'homepage/templates'
             ],
         'APP_DIRS': True,
         'OPTIONS': {

@@ -9,6 +9,7 @@ from django.db.models import Q,Sum
 from django.db.models.query import QuerySet
 
 from visor.serializer import FabresSerializer as FS
+import os
 
 # Create your views here.
 
@@ -16,8 +17,9 @@ from visor.serializer import FabresSerializer as FS
 def index(request):
     dist = model.objects.all()
     data = FS.PublicSerializer(dist)
+    # print(os.environ.get('DJANGO_DEBUG'))
 
-    return render(request,r'portal/index.html',{
+    return render(request,r'home/index.html',{
         'data': data
 
     })
