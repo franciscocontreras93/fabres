@@ -5,7 +5,7 @@ from visor import views,apiviews
 
 
 urlpatterns = [
-    # path('', views.index, name='index'),
+    path('', views.index, name='index'),
     path('users/', include('django.contrib.auth.urls')),
     path("geoportal/",views.webmap, name="webmap"),
     path("geoportal/indicadores",views.distIndicadores, name="indicadores"),
