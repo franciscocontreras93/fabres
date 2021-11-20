@@ -50,11 +50,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-d6!_2(nall^+*0pal+et^%
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
 LOCAL = False
-
-
-
 ALLOWED_HOSTS = ['*']
 
 
@@ -72,7 +68,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'widget_tweaks',
     'visor',
-    'homepage',
+    # 'homepage',
     'corsheaders'
 ]
 

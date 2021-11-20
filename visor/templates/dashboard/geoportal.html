@@ -2,11 +2,13 @@
 {%block content %}
 
 <div
-  class="container-fluid mt-2 rounded shadow"
+  class="container-fluid mt-2 rounded shadow position-relative"
   id="map"
   style="height: 88vh">
 
-  {% include 'dashboard/sidebar-content.html' %}
-</div>
+{% comment %} <!-- <div class="container position-absolute bg-primary w-25 h-50" style="z-index: 9999; bottom: 25px ; right: 10px;"> {% endcomment %}
+  
+{% include 'dashboard/sidebar-content.html' %}
 
+</div>
 {% endblock %}

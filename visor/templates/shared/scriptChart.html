@@ -18,7 +18,7 @@
                 label: "Total Pob:",
                 backgroundColor: ["#198754","#ffc107","#ff6a00","#dc3545"],
                 borderColor: "rgba(2,117,216,1)",
-                data: ['{{low}}', '{{medium}}', '{{high}}', '{{very_high}}'],
+                data: ['{{l}}', '{{m}}', '{{h}}', '{{vh}}']
             }],
         },
         options: {
@@ -35,9 +35,9 @@
                 }],
                 yAxes: [{
                     ticks: {
-                        min: Math.min('{{low}}', '{{medium}}', '{{high}}',
-                        '{{very_high}}')-Math.ceil(Math.min('{{low}}', '{{medium}}', '{{high}}', '{{very_high}}')),
-                        max: Math.ceil(Math.max('{{low}}', '{{medium}}', '{{high}}', '{{very_high}}')/500)*500
+                        min: Math.min('{{l}}', '{{m}}', '{{h}}',
+                        '{{vh}}')-Math.ceil(Math.min('{{l}}', '{{m}}', '{{h}}', '{{vh}}')),
+                        max: Math.ceil(Math.max('{{l}}', '{{m}}', '{{h}}', '{{vh}}')/500)*500
                         ,
                         maxTicksLimit: 6
                     },
@@ -58,10 +58,10 @@
         total = '{{total}}'
         op = arg*100/total
         // console.log(typeof(op))
-        return op.toFixed(2)
+        return op.toFixed(1)
     }
 
-    retPercent('{{low}}')
+    
 
     
 
@@ -73,8 +73,8 @@
                 label: "Total Pob:",
                 backgroundColor: ["#198754","#ffc107","#ff6a00","#dc3545"],
                 borderColor: "rgba(2,117,216,1)",
-                data: [retPercent('{{low}}'), retPercent('{{medium}}'), retPercent('{{high}}'),
-                retPercent('{{very_high}}')],
+                data: [retPercent('{{l}}'), retPercent('{{m}}'), retPercent('{{h}}'),
+                retPercent('{{vh}}')],
                 borderWidth:2,
                 borderColor:'#fff',
                  
@@ -94,7 +94,7 @@
     });
     const BarOptions = {
         type: "doughnut",
-        data: ['{{low}}', '{{medium}}', '{{high}}', '{{very_high}}'],
+        data: ['{{l}}', '{{m}}', '{{h}}', '{{vh}}'],
     }
     
 
