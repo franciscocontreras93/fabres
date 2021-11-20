@@ -1,0 +1,72 @@
+
+<div class="modal fade" id="modal1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Indicadores Riesgo Covid-19</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card shadow mt-3">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar me-2"> </i>Poblacion en Riesgo
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body"><canvas id="BarChart" width="100%" height="40"></canvas></div>
+                    </div>
+                </div>
+                <div class="card mb-4 shadow mt-3">
+                    <div class="card-header">
+                        <i class="fas fa-chart-pie"></i>
+                        Porcentaje en Riesgo
+                    </div>
+                    <div class="card-body"><canvas id="PieChart" width="100%" height="40"></canvas></div>
+
+                </div>
+                
+                <div class="card mb-4 shadow mt-3">
+                    <div class="card-header">
+                        <i class="fas fa-chart-pie"></i>
+                        Indicadores
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Riesgo</th>
+                                    <th>Manzanas</th>
+                                    <th>Poblacion</th>
+                                    <th>%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                {% for e in info %}
+                                <tr>
+                                <td style="background-color: {{e.4}}">{{e.0}}</td>
+                                <td>{{e.1}}</td>
+                                <td>{{e.2}}</td>
+                                <td>{{e.3}} %</td>
+                                
+                                                    
+                                    
+                                </tr>
+                                {% endfor %}
+                                
+
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+

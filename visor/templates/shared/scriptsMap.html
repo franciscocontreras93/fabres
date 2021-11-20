@@ -1,37 +1,128 @@
+{% load static %}
+
+
+
+
+<script src="{% static 'js/portal/leaflet.js' %}"></script>
+
+{% comment %} <script src="{% static 'js/portal/draw/leaflet.draw.js' %}"></script>
+<script src="{% static 'js/portal/draw/Leaflet.Draw.Event.js' %}"></script>
+
+<script src="{% static 'js/portal/draw/Toolbar.js' %}"></script>
+<script src="{% static 'js/portal/draw/Tooltip.js' %}"></script> 
+
+
+
+<script src="{% static 'js/portal/draw/ext/GeometryUtil.js' %}"></script>
+<script src="{% static 'js/portal/draw/ext/LatLngUtil.js' %}"></script>
+<script src="{% static 'js/portal/draw/ext/LineUtil.Intersect.js' %}"></script>
+<script src="{% static 'js/portal/draw/ext/Polygon.Intersect.js' %}"></script>
+<script src="{% static 'js/portal/draw/ext/Polyline.Intersect.js' %}"></script>
+<script src="{% static 'js/portal/draw/ext/TouchEvents.js' %}"></script> 
+
+
+<script src="{% static 'js/portal/draw/draw/DrawToolbar.js' %}"></script>
+<script src="{% static 'js/portal/draw/draw/handler/Draw.Feature.js' %}"></script>
+<script src="{% static 'js/portal/draw/draw/handler/Draw.SimpleShape.js' %}"></script>
+<script src="{% static 'js/portal/draw/draw/handler/Draw.Polyline.js' %}"></script>
+<script src="{% static 'js/portal/draw/draw/handler/Draw.Marker.js' %}"></script>
+<script src="{% static 'js/portal/draw/draw/handler/Draw.Circle.js' %}"></script>
+<script src="{% static 'js/portal/draw/draw/handler/Draw.CircleMarker.js' %}"></script>
+<script src="{% static 'js/portal/draw/draw/handler/Draw.Polygon.js' %}"></script>
+<script src="{% static 'js/portal/draw//draw/handler/Draw.Rectangle.js' %}"></script>
+
+
+<script src="{% static 'js/portal/draw/edit/EditToolbar.js' %}"></script>
+<script src="{% static 'js/portal/draw/edit/handler/EditToolbar.Edit.js' %}"></script>
+<script src="{% static 'js/portal/draw/edit/handler/EditToolbar.Delete.js' %}"></script>
+
+<script src="{% static 'js/portal/draw/Control.Draw.js' %}"></script>
+
+<script src="{% static 'js/portal/draw/edit/handler/Edit.Poly.js' %}"></script>
+<script src="{% static 'js/portal/draw/edit/handler/Edit.SimpleShape.js' %}"></script>
+<script src="{% static 'js/portal/draw/edit/handler/Edit.Rectangle.js' %}"></script>
+<script src="{% static 'js/portal/draw/edit/handler/Edit.Marker.js' %}"></script>
+<script src="{% static 'js/portal/draw/edit/handler/Edit.CircleMarker.js' %}"></script>
+<script src="{% static 'js/portal/draw/edit/handler/Edit.Circle.js' %}"></script>  {% endcomment %}
+
+
+
+
+
+<script src="{% static 'js/portal/Autolinker.min.js' %}"></script>
+<script src="{% static 'js/portal/Leaflet.Control.Custom.js' %}"></script>
+<script src="{% static 'js/portal/easy-button.js' %}"></script>
+<script src="{% static 'js/portal/L.Control.Locate.min.js' %}"></script>
+<script src="{% static 'js/portal/leaflet-hash.js' %}"></script>
+<script src="{% static 'js/portal/leaflet-search.min.js' %}"></script>
+<script src="{% static 'js/portal/leaflet-search.js' %}"></script>
+<script src="{% static 'js/portal/leaflet-sidebar.js' %}"></script>
+
+
+
 <script>
-    var map = L.map('map').setView([-12.939947, -74.247891], 13);
-    
+        // let data2;
+
+        // let form = document.querySelector('#searchForm')
+        // let value;
+        // form.addEventListener('submit',function(e){
+            
+        //     e.preventDefault()
+        //     value =  document.querySelector('#search').value;
+        //     console.log('SIGNAL EMITED')
+        //     get_distrito(value)
+        // })
+
+        // function get_distrito(q){
+        //     console.log("ACA FUNCIONA BIEN");
+        //     console.log(q)
+
+        //     $.ajax({
+        //         url: `http://127.0.0.1:8000/rest/fabres/`+q,
+        //         type: 'GET',
+        //         success: function(json){
+        //             // document.querySelector('#search').
+        //             // console.log(json)
+        //             console.log('some'),
+        //             data2 = json
+        //         }
+
+        //     })
+        // }
+
+
+
+    var map = L.map('map', {
+        drawControl: true
+    }).setView([-12.939947, -74.247891], 13);
+
     map.attributionControl.setPrefix(
-    `Desarrollado por: <a href="https://www.linkedin.com/in/geofrancisco/" title="GeoSIG" "target=" _blank">Francisco
+        `Desarrollado por: <a href="https://www.linkedin.com/in/geofrancisco/" title="GeoSIG" "target=" _blank">Francisco
         Contreras &middot Rafael Vasquez </a>`
     );
-    L.control.locate({
-    locateOptions: {
-    maxZoom: 19
-    }
-    }).addTo(map);
+   
     map.createPane('pane_baseMap');
     map.getPane('pane_baseMap').style.zIndex = 0;
     var baseMapsatelital = L.tileLayer(
-    'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-    pane: 'pane_baseMap',
-    attribution: '&copy; <a href="">Google Earth</a>',
-    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-    opacity: 1.0,
-    minZoom: 13,
-    maxZoom: 28,
-    minNativeZoom: 0,
-    maxNativeZoom: 20
-    });
+        'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_baseMap',
+            attribution: '&copy; <a href="">Google Earth</a>',
+            subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+            opacity: 1.0,
+            minZoom: 13,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
     var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
     // map.addLayer(OpenStreetMap_Mapnik)
     // POPUPS
     function pop_risk(feature, layer) {
-    var popupContent = `<table class="table-sm table-dark table-bordered border-white">
+        var popupContent = `<table class="table-sm table-dark table-bordered border-white">
         <thead>
             <tr>
                 <th scope="col"> Manzana</th>
@@ -55,338 +146,341 @@
         <tbody>
     </table>
     `;
-    layer.bindPopup(popupContent, {
-    maxHeight: 1000,
-    maxWidth: 1000,
+        layer.bindPopup(popupContent, {
+            maxHeight: 1000,
+            maxWidth: 1000,
 
-    });
+        });
     }
 
 
     // CREATE LAYERPANE
     map.createPane('dist_pane');
     map.getPane('dist_pane').style.zIndex = 400
+    
+  
+    
+    
+    
     distritos = '{{data|safe}}'
-    dist = '{{data2|safe}}'
-
     data = JSON.parse(distritos)
 
     var covid_riesgo_lyr = new L.geoJson(data, {
-    attribution: '',
-    interactive: true,
-    onEachFeature: pop_risk,
-    pane: 'dist_pane',
-    dataVar: 'distritos',
-    layerName: 'Escenario de Riesgos',
-    style: function (feature) {
-    switch (String(feature.properties['n_riesgo'])) {
-    case "Muy Alto":
-    return {
-    color: '#d7191c',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case "Alto":
-    return {
-    color: '#fe9000',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case "Medio":
-    return {
-    color: '#ffe900',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case "Bajo":
-    return {
-    color: '#1a9641',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    }
-    }
+        attribution: '',
+        interactive: true,
+        onEachFeature: pop_risk,
+        pane: 'dist_pane',
+        dataVar: 'distritos',
+        layerName: 'Escenario de Riesgos',
+        style: function (feature) {
+            switch (String(feature.properties['n_riesgo'])) {
+                case "Muy Alto":
+                    return {
+                        color: '#d7191c',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case "Alto":
+                    return {
+                        color: '#fe9000',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case "Medio":
+                    return {
+                        color: '#ffe900',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case "Bajo":
+                    return {
+                        color: '#1a9641',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+            }
+        }
 
 
     }).addTo(map)
-    
+
     map.fitBounds(covid_riesgo_lyr.getBounds());
-    
-    
+
+
     var dens_pob_lyr = new L.geoJson(data, {
-    attribution: '',
-    interactive: true,
-    onEachFeature: pop_risk,
-    pane: 'dist_pane',
-    dataVar: 'distritos',
-    layerName: 'Escenario de Riesgos',
-    style: function (feature) {
-    switch (String(feature.properties['q_densid'])) {
-    case "Q5":
-    return {
-    color: '#440154',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case "Q4":
-    return {
-    color: '#3a528b',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case "Q3":
-    return {
-    color: '#20908d',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case "Q2":
-    return {
-    color: '#5dc962',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case "Q1":
-    return {
-    color: '#fde725',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    }
-    }
+        attribution: '',
+        interactive: true,
+        onEachFeature: pop_risk,
+        pane: 'dist_pane',
+        dataVar: 'distritos',
+        layerName: 'Escenario de Riesgos',
+        style: function (feature) {
+            switch (String(feature.properties['q_densid'])) {
+                case "Q5":
+                    return {
+                        color: '#440154',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case "Q4":
+                    return {
+                        color: '#3a528b',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case "Q3":
+                    return {
+                        color: '#20908d',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case "Q2":
+                    return {
+                        color: '#5dc962',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case "Q1":
+                    return {
+                        color: '#fde725',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+            }
+        }
 
 
     })
     var pob_nbi_lyr = new L.geoJson(data, {
-    attribution: '',
-    interactive: true,
-    onEachFeature: pop_risk,
-    pane: 'dist_pane',
-    dataVar: 'distritos',
-    layerName: 'Escenario de Riesgos',
-    style: function (feature) {
-    switch (String(feature.properties['q_propnbi'])) {
-    case "Q5":
-    return {
-    color: '#9f4f00',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case "Q4":
-    return {
-    color: '#db7909',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case "Q3":
-    return {
-    color: '#e7a612',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case "Q2":
-    return {
-    color: '#f3d31b',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case "Q1":
-    return {
-    color: '#ffff24',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    }
-    }
+        attribution: '',
+        interactive: true,
+        onEachFeature: pop_risk,
+        pane: 'dist_pane',
+        dataVar: 'distritos',
+        layerName: 'Escenario de Riesgos',
+        style: function (feature) {
+            switch (String(feature.properties['q_propnbi'])) {
+                case "Q5":
+                    return {
+                        color: '#9f4f00',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case "Q4":
+                    return {
+                        color: '#db7909',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case "Q3":
+                    return {
+                        color: '#e7a612',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case "Q2":
+                    return {
+                        color: '#f3d31b',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case "Q1":
+                    return {
+                        color: '#ffff24',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+            }
+        }
 
 
     })
     var nivel_contagio_lyr = new L.geoJson(data, {
-    attribution: '',
-    interactive: true,
-    onEachFeature: pop_risk,
-    pane: 'dist_pane',
-    dataVar: 'distritos',
-    layerName: 'Escenario de Riesgos',
-    style: function (feature) {
-    switch (String(feature.properties['q_mcalor'])) {
-    case 'Q5':
-    return {
-    color: '#d7191c',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q4':
-    return {
-    color: '#d7191c',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q3':
-    return {
-    color: '#fea600',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q2':
-    return {
-    color: '#fea600',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q1':
-    return {
-    color: '#c7e800',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'N/D':
-    return {
-    color: '#c7e800',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
+        attribution: '',
+        interactive: true,
+        onEachFeature: pop_risk,
+        pane: 'dist_pane',
+        dataVar: 'distritos',
+        layerName: 'Escenario de Riesgos',
+        style: function (feature) {
+            switch (String(feature.properties['q_mcalor'])) {
+                case 'Q5':
+                    return {
+                        color: '#d7191c',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q4':
+                    return {
+                        color: '#d7191c',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q3':
+                    return {
+                        color: '#fea600',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q2':
+                    return {
+                        color: '#fea600',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q1':
+                    return {
+                        color: '#c7e800',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'N/D':
+                    return {
+                        color: '#c7e800',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
 
-    }
-    }
+            }
+        }
 
 
     })
     var q30_59_lyr = new L.geoJson(data, {
-    attribution: '',
-    interactive: true,
-    onEachFeature: pop_risk,
-    pane: 'dist_pane',
-    dataVar: 'distritos',
-    layerName: 'Escenario de Riesgos',
-    style: function (feature) {
-    switch (String(feature.properties['q_30_a_59'])) {
-    case 'Q5':
-    return {
-    color: '#d7191c',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q4':
-    return {
-    color: '#fd7a00',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q3':
-    return {
-    color: '#ffff00',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q2':
-    return {
-    color: '#abdd00',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q1':
-    return {
-    color: '#1a9641',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
+        attribution: '',
+        interactive: true,
+        onEachFeature: pop_risk,
+        pane: 'dist_pane',
+        dataVar: 'distritos',
+        layerName: 'Escenario de Riesgos',
+        style: function (feature) {
+            switch (String(feature.properties['q_30_a_59'])) {
+                case 'Q5':
+                    return {
+                        color: '#d7191c',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q4':
+                    return {
+                        color: '#fd7a00',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q3':
+                    return {
+                        color: '#ffff00',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q2':
+                    return {
+                        color: '#abdd00',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q1':
+                    return {
+                        color: '#1a9641',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
 
 
-    }
-    }
+            }
+        }
 
 
     })
     var q60_lyr = new L.geoJson(data, {
-    attribution: '',
-    interactive: true,
-    onEachFeature: pop_risk,
-    pane: 'dist_pane',
-    dataVar: 'distritos',
-    layerName: 'Escenario de Riesgos',
-    style: function (feature) {
-    switch (String(feature.properties['q_pob60'])) {
-    case 'Q5':
-    return {
-    color: '#d7191c',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q4':
-    return {
-    color: '#fd7a00',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q3':
-    return {
-    color: '#ffff00',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q2':
-    return {
-    color: '#abdd00',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q1':
-    return {
-    color: '#1a9641',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
+        attribution: '',
+        interactive: true,
+        onEachFeature: pop_risk,
+        pane: 'dist_pane',
+        dataVar: 'distritos',
+        layerName: 'Escenario de Riesgos',
+        style: function (feature) {
+            switch (String(feature.properties['q_pob60'])) {
+                case 'Q5':
+                    return {
+                        color: '#d7191c',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q4':
+                    return {
+                        color: '#fd7a00',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q3':
+                    return {
+                        color: '#ffff00',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q2':
+                    return {
+                        color: '#abdd00',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q1':
+                    return {
+                        color: '#1a9641',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
 
 
-    }
-    }
+            }
+        }
 
 
     })
     var qMercado_lyr = new L.geoJson(data, {
-    attribution: '',
-    interactive: true,
-    onEachFeature: pop_risk,
-    pane: 'dist_pane',
-    dataVar: 'distritos',
-    layerName: 'Escenario de Riesgos',
-    style: function (feature) {
-    switch (String(feature.properties['q_mercado'])) {
-    case 'Q5':
-    return {
-    color: '#ff0000',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q4':
-    return {
-    color: '#ffa962',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q3':
-    return {
-    color: '#d5f23e',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q2':
-    return {
-    color: '#aef289',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
-    case 'Q1':
-    return {
-    color: '#bebebe',
-    fillOpacity: '0.60',
-    stroke: ''
-    };
+        attribution: '',
+        interactive: true,
+        onEachFeature: pop_risk,
+        pane: 'dist_pane',
+        dataVar: 'distritos',
+        layerName: 'Escenario de Riesgos',
+        style: function (feature) {
+            switch (String(feature.properties['q_mercado'])) {
+                case 'Q5':
+                    return {
+                        color: '#ff0000',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q4':
+                    return {
+                        color: '#ffa962',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q3':
+                    return {
+                        color: '#d5f23e',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q2':
+                    return {
+                        color: '#aef289',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
+                case 'Q1':
+                    return {
+                        color: '#bebebe',
+                            fillOpacity: '0.60',
+                            stroke: ''
+                    };
 
 
-    }
-    }
+            }
+        }
 
 
     })
@@ -396,84 +490,52 @@
 
 
     var basemaps = {
-    "Google Earth: ": baseMapsatelital,
-    "OpenStreeMaps: ": OpenStreetMap_Mapnik
+        "Google Earth: ": baseMapsatelital,
+        "OpenStreeMaps: ": OpenStreetMap_Mapnik
     };
 
     var theme = {
-    "Escenario Riesgo Covid-19: ": covid_riesgo_lyr,
-    "Densidad Poblacional: ": dens_pob_lyr,
-    "Poblacion NBI: ": pob_nbi_lyr,
-    "Areas de Contagio (EN DESARROLLO)": nivel_contagio_lyr,
-    "Dist. Pob 30 a 59:": q30_59_lyr,
-    "Dist. Mayores de 60:": q60_lyr,
-    "Areas de Influencia Publica:": qMercado_lyr,
+        "Escenario Riesgo Covid-19: ": covid_riesgo_lyr,
+        "Densidad Poblacional: ": dens_pob_lyr,
+        "Poblacion NBI: ": pob_nbi_lyr,
+        "Areas de Contagio (EN DESARROLLO)": nivel_contagio_lyr,
+        "Dist. Pob 30 a 59:": q30_59_lyr,
+        "Dist. Mayores de 60:": q60_lyr,
+        "Areas de Influencia Publica:": qMercado_lyr,
 
     }
 
     L.control.layers(basemaps, theme).addTo(map)
+     L.control.locate({
+     locateOptions: {
+     maxZoom: 19
+     }
+     }).addTo(map);
 
-    // PANEL BUSQUEDA CON ajax
+    // var sidebar = L.control.sidebar({ container: 'sidebar', position:'left'}).addTo(map);
 
-    // function searchByAjax(text,callResponse){
-    //     return $.ajax({
-    //         url: '127.0.0.1:8000/rest/fabres/chaca',
-    //         type: 'GET',
-    //         data: {q:text},
-    //         dataType: 'json',
-    //         success: function(json){
-    //             callResponse(json)
-    //         }
-    //     });
-    // }
-
-    // map.addControl( new L.Control.Search({sourceData: searchByAjax, text:'Distrito...', markerLocation:true}))
-
-
-    // PANEL BUSQUEDA NUEVO 
-    var searchControl = new L.Control.Search({
-        layer: covid_riesgo_lyr,
-        propertyName: 'distrito',
-
-        marker: false,
-        moveToLocation: function(latlng, title,map){
-            var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-            map.setView(latlng, zoom );
-        }
-    });
-    searchControl.on('search:locationfound', function(e){
-        e.layer.setStyle({fillColor: '#3f0', color:'#0f0'})
-        if(e.layer._popup){
-            e.layer.openPopup();
-        }
-    }).on('search:collapse', function(e){
-        featuresLayer.eachLayer(function(layer){
-            featuresLayer.resetStyle(layer)
-        })
-    })
-    
-    map.addControl(searchControl)
-    
-    // PANEL BUSQUEDA VIEJA
-    // var searchLayer = L.layerGroup().addTo(map);
-    // map.addControl(new L.Control.Search({
-    // url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
-    // jsonpParam: 'json_callback',
-    // propertyName: 'display_name',
-    // propertyLoc: ['lat', 'lon'],
-    // autoCollapse: true,
-    // autoType: false,
-    // minLength: 2,
-    // collapse: false
-
-    // }))
-
-
-    var sidebar = L.control.sidebar({ container: 'sidebar', position:'right'}).addTo(map);
-    
-
-    console.log(covid_riesgo_lyr.getBounds())
-
+   
+     L.control.custom({
+     position: 'topright',
+     content : `<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal1"><i
+             class="fas fa-chart-bar"> </i></button>`,
+     classes : 'btn-group-vertical btn-group-sm',
+     style :
+     {
+     margin: '10px',
+     padding: '0px 0 0 0',
+     cursor: 'pointer',
+     }
+     })
+     .addTo(map);
 
     
+
+
+
+
+
+
+
+
 </script>
