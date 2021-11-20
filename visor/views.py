@@ -130,16 +130,15 @@ def webmap(request):
     m = SumCount(dq, "n_riesgo", 'Medio','Sum' )
     l = SumCount(dq, "n_riesgo", 'Bajo', 'Sum')
 
-    p_vh = round((vh*100/total), 1)
-    p_h = round((h*100/total), 1)
-    p_m = round((m*100/total), 1)
-    p_l = round((l*100/total), 1)
-    
-    q_vh = SumCount(dq, "n_riesgo", 'Muy Alto', 'Count')
-    q_h = SumCount(dq, "n_riesgo", 'Alto', 'Count')
-    q_m = SumCount(dq, "n_riesgo", 'Medio', 'Count')
-    q_l = SumCount(dq, "n_riesgo", 'Bajo', 'Count')
     total = pobTotal(dq)
+
+    for x in class_riesgo:
+        pob_riesgo.append(SumCount(dq, 'n_riesgo', x, 'Sum'))
+    for x in class_riesgo:
+        qm_riesgo.append(SumCount(dq, 'n_riesgo', x, 'Count'))
+    for i in pob_riesgo:
+        percent_pob.append(round((i*100/total), 1))
+
     table = list(zip(class_riesgo,qm_riesgo,pob_riesgo,percent_pob,colores))
     print(table)
 
@@ -151,16 +150,9 @@ def webmap(request):
             'h': h,
             'm': m,
             'l': l,
-            'q_vh': q_vh,
-            'q_h': q_h,
-            'q_m': q_m,
-            'q_l': q_l,
-            'p_vh': p_vh,
-            'p_h': p_h,
-            'p_m': p_m,
-            'p_l': p_l,
+            
             'total': total,
-            'total_m': q_vh+ q_h+q_m+q_l,
+
             'nombre': nombre
         })
     
@@ -185,10 +177,6 @@ def distIndicadores(request):
         h = SumCount(dq, "n_riesgo", 'Alto', 'Sum')
         m = SumCount(dq, "n_riesgo", 'Medio', 'Sum')
         l = SumCount(dq, "n_riesgo", 'Bajo', 'Sum')
-        q_vh = SumCount(dq, "n_riesgo", 'Muy Alto', 'Count')
-        q_h = SumCount(dq, "n_riesgo", 'Alto', 'Count')
-        q_m = SumCount(dq, "n_riesgo", 'Medio', 'Count')
-        q_l = SumCount(dq, "n_riesgo", 'Bajo', 'Count')
         total = pobTotal(dq)
         nombre = query.capitalize()
         pass
@@ -196,25 +184,18 @@ def distIndicadores(request):
     h = SumCount(dq, "n_riesgo", 'Alto', 'Sum')
     m = SumCount(dq, "n_riesgo", 'Medio', 'Sum')
     l = SumCount(dq, "n_riesgo", 'Bajo', 'Sum')
-    q_vh = SumCount(dq, "n_riesgo", 'Muy Alto', 'Count')
-    q_h = SumCount(dq, "n_riesgo", 'Alto', 'Count')
-    q_m = SumCount(dq, "n_riesgo", 'Medio', 'Count')
-    q_l = SumCount(dq, "n_riesgo", 'Bajo', 'Count')
     total = pobTotal(dq)
     print(total)
 
     if len(dq) >= 1:
         return render(request, r'dashboard/indicadores.html', {
-            'very_high': vh,
-            'high': h,
-            'medium': m,
-            'low': l,
-            'q_vh': q_vh,
-            'q_h': q_h,
-            'q_m': q_m,
-            'q_l': q_l,
+            'vh': vh,
+            'h': h,
+            'm': m,
+            'l': l,
+            
             'total': total,
-            'total_m': q_vh + q_h+q_m+q_l,
+            
             ''
             'nombre': nombre
         })
