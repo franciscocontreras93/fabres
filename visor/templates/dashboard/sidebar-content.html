@@ -1,3 +1,5 @@
+{% load humanize %}
+
 <div id="sidebar" class="leaflet-sidebar collapsed">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
@@ -38,48 +40,73 @@
         <div class="leaflet-sidebar-pane" id="risk">
             <h1 class="leaflet-sidebar-header">
                 Riesgo de Contagio COVID-19
-                <span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span>
+                <span class="leaflet-sidebar-close"><i class="fas fa-times"></i></span>
             </h1>
             
 
             <div class="container-fluid p-2">
                 <div class="d-flex">
                     <div class="flex-row">
-                        <!-- <h3 class="fw-bolder"> TITULO</h3> -->
-                        <!-- <form class="d-none d-md-inline-block form-inline ms-auto my-2 my-md-0" method="get">
-                            <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Buscar..." aria-label="Buscar..."
-                                    aria-describedby="btnNavbarSearch" name='search' />
-                                <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i
-                                        class="fas fa-search"></i></button>
-                            </div>
-                        </form> -->
-                        
+                        {% if nombre %}
+                        <h4 class="fw-bolder">{{nombre}} | {{total | intcomma}} Hab</h4>
+                        {% endif %}                       
                     </div>
                 </div>
                 
-                {% if nombre %}
-                <h4>Distrito {{nombre}}</h4>
-
                 
-                {% endif %}
-
-                <div class="card shadow mt-3">
+                <div class="card shadow mt-1">
                     <div class="card-header">
-                        <i class="fas fa-chart-bar me-2"> </i>Indicadores
+                        Indicadores de Riesgo | {{nombre}}
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Riesgo</th>
+                                    <th>Manzanas</th>
+                                    <th>Poblacion</th>
+                                    <th>%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for e in info %}
+                                <tr>
+                                    <td style="background-color: {{e.4}}">{{e.0}}</td>
+                                    <td>{{e.1}}</td>
+                                    <td>{{e.2 | intcomma}}</td>
+                                    <td>{{e.3}} %</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfooter>
+                                <tr>
+                                    <th>Total</th>
+                                    <th>{{total_manzanas}}</th>
+                                    <th>{{total | intcomma}}</th>
+                                    <th>{{total_porcentaje}}%</th>
+                                </tr>
+                            </tfooter>
+                        </table>
+                    </div>
+                </div>
+                <div class="card shadow mt-1">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar me-2"> </i>Poblacion en Riesgo | {{nombre}}
                     </div>
                     <div class="card-body">
                         <div class="card-body"><canvas id="BarChart" width="100%" height="40"></canvas></div>
                     </div>
                 </div>
-                <div class="card mb-4 shadow mt-3">
+                <div class="card shadow mt-1">
                     <div class="card-header">
                         <i class="fas fa-chart-pie"></i>
-                        Porcentaje en Riesgo
+                        Porcentaje de Poblacion en Riesgo | {{nombre}}
                     </div>
                     <div class="card-body"><canvas id="PieChart" width="100%" height="40"></canvas></div>
 
                 </div>
+                
 
             </div>
 
@@ -87,7 +114,7 @@
         <div class="leaflet-sidebar-pane" id="density">
             <h1 class="leaflet-sidebar-header">
                 Densidad Poblacional
-                <span class="leaflet-sidebar-close"><i class="fa fa-caret-right"></i></span>
+                <span class="leaflet-sidebar-close"><i class="fas fa-times"></i></i></span>
             </h1>
             
 

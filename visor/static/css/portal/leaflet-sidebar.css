@@ -41,7 +41,8 @@
   top: 0;
   bottom: 0;
   height: 100%;
-  background-color: #fff; }
+  background-color: rgb(33, 37, 41,) !important;
+  }
   .leaflet-sidebar-left .leaflet-sidebar-tabs {
     left: 0; }
   .leaflet-sidebar-right .leaflet-sidebar-tabs {

@@ -88,6 +88,10 @@ def webmap(request):
     percent_pob = []
     total = pobTotal(dq)
     data = FS.PublicSerializer(dq) 
+    total_manzana = 0
+    total_porcentaje = 0
+
+
     if query != None:
         dq = dq.filter(
             Q(distrito__icontains=query) | Q(nom_ccpp__icontains=query))
@@ -104,43 +108,31 @@ def webmap(request):
         h = SumCount(dq, "n_riesgo", 'Alto', 'Sum')
         m = SumCount(dq, "n_riesgo", 'Medio', 'Sum')
         l = SumCount(dq, "n_riesgo", 'Bajo', 'Sum')
-        
-        p_vh = round((vh*100/total),1)
-        p_h = round((h*100/total),1)
-        p_m = round((m*100/total),1)
-        p_l = round((l*100/total),1)
-        
-        q_vh = SumCount(dq, "n_riesgo", 'Muy Alto', 'Count')
-        q_h = SumCount(dq, "n_riesgo", 'Alto', 'Count')
-        q_m = SumCount(dq, "n_riesgo", 'Medio', 'Count')
-        q_l = SumCount(dq, "n_riesgo", 'Bajo', 'Count')
-
         nombre = query.capitalize()
-        for x in class_riesgo:
-            pob_riesgo.append(SumCount(dq, 'n_riesgo', x, 'Sum'))
-        for x in class_riesgo:
-            qm_riesgo.append(SumCount(dq, 'n_riesgo', x, 'Count'))
-        for i in pob_riesgo:
-            percent_pob.append(round((i*100/total), 1))
-
         table = list(zip(class_riesgo, qm_riesgo, pob_riesgo, percent_pob,colores))
     
     vh = SumCount(dq, "n_riesgo", 'Muy Alto', 'Sum')
     h = SumCount(dq, "n_riesgo", 'Alto', 'Sum')
     m = SumCount(dq, "n_riesgo", 'Medio','Sum' )
     l = SumCount(dq, "n_riesgo", 'Bajo', 'Sum')
-
+   
     total = pobTotal(dq)
+
+    total_manzana = sum(qm_riesgo)
+    total_porcentaje = round(sum(percent_pob),0)
 
     for x in class_riesgo:
         pob_riesgo.append(SumCount(dq, 'n_riesgo', x, 'Sum'))
     for x in class_riesgo:
         qm_riesgo.append(SumCount(dq, 'n_riesgo', x, 'Count'))
     for i in pob_riesgo:
-        percent_pob.append(round((i*100/total), 1))
+        percent_pob.append(round((i*100/total), 2))
+    
+    
+
 
     table = list(zip(class_riesgo,qm_riesgo,pob_riesgo,percent_pob,colores))
-    print(table)
+    print(qm_riesgo, percent_pob)
 
     if len(dq) >= 1:
         return render(request, r'dashboard/geoportal.html', {
@@ -150,8 +142,9 @@ def webmap(request):
             'h': h,
             'm': m,
             'l': l,
-            
             'total': total,
+            'total_manzanas': total_manzana,
+            'total_porcentaje': total_porcentaje,
 
             'nombre': nombre
         })

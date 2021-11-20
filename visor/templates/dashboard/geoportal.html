@@ -6,34 +6,9 @@
   id="map"
   style="height: 88vh">
 
-<!-- <div class="container position-absolute bg-primary w-25 h-50" style="z-index: 9999; bottom: 25px ; right: 10px;">
+{% comment %} <!-- <div class="container position-absolute bg-primary w-25 h-50" style="z-index: 9999; bottom: 25px ; right: 10px;"> {% endcomment %}
   
-  <table id="datatablesSimple" class="table">
-    <thead>
-      <tr>
-        <th>Riesgo</th>
-        <th>C. Manzanas</th>
-        <th>Poblacion</th>
-        <th>Pob %</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for c in clases  %}
-      <tr>
-        <td>
-          {{c}}
-        </td>
-
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-
-</div> -->
 {% include 'dashboard/sidebar-content.html' %}
 
 </div>
-
-{% include 'shared/modals-map.html' %}
-
 {% endblock %}
