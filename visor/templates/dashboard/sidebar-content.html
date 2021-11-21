@@ -1,30 +1,31 @@
 {% load humanize %}
 
-<div id="sidebar" class="leaflet-sidebar collapsed">
+
+<div id="sidebar" class="leaflet-sidebar h-50 collapsed">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
-        <ul role="tablist">
+        <ul role="tablist ">
             <li>
                 <a href="#risk" role="tab"><i class="fas fa-virus"></i></a>
             </li>
             <li>
-                <a href="#density" role="tab"><i class="fas fa-users"></i></i></a>
+                <a href="#density" role="tab"><i class="fas fa-users"></i></a>
             </li>
             <li class="">
                 <a href="#nbi" role="tab"><i class="fas fa-hand-holding-water"></i></a>
             </li>
-            <li class="">
+            <!-- <li class="">
                 <a href="#hazard" role="tab"><i class="fas fa-biohazard"></i></a>
-            </li>
+            </li> -->
             <li class="">
                 <a href="#3059" role="tab"><i class="fas fa-walking"></i></a>
             </li>
             <li class="">
                 <a href="#60" role="tab"><i class="fas fa-blind"></i></a>
             </li>
-            <li class="">
+            <!-- <li class="">
                 <a href="#public" role="tab"><i class="fas fa-store"></i></a>
-            </li>
+            </li> -->
         </ul>
 
         {% comment %} <ul role="tablist">
@@ -49,6 +50,10 @@
                     <div class="flex-row">
                         {% if nombre %}
                         <h4 class="fw-bolder">{{nombre}} | {{total | intcomma}} Hab</h4>
+
+                        {% else %}
+                        <h4 class="fw-bolder"> Total Estudio | {{total | intcomma}} Hab</h4>
+
                         {% endif %}                       
                     </div>
                 </div>
@@ -139,7 +144,7 @@
                         <i class="fas fa-chart-bar me-2"> </i>Indicadores
                     </div>
                     <div class="card-body">
-                        <div class="card-body"><canvas id="BarChart" width="100%" height="40"></canvas></div>
+                        <div class="card-body"><canvas id="SideBarChartRisk" width="100%" height="40"></canvas></div>
                     </div>
                 </div>
                 <div class="card mb-4 shadow mt-3">
@@ -157,3 +162,6 @@
 
     </div>
 </div>
+
+
+

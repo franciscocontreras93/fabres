@@ -81,15 +81,20 @@ def webmap(request):
     dq = model.objects.all()
     nombre = ''
     class_riesgo = ['Muy Alto', 'Alto', 'Medio', 'Bajo']
-    colores = ["#dc3545c2", "#ff6a00c2", "#ffc107c2",
+    colores_riesgo = ["#dc3545c2", "#ff6a00c2", "#ffc107c2",
                "#198754c2"]
     pob_riesgo = []
     qm_riesgo = []
     percent_pob = []
     total = pobTotal(dq)
-    data = FS.PublicSerializer(dq) 
-    total_manzana = 0
-    total_porcentaje = 0
+    data = FS.PublicSerializer(dq)
+    
+    for x in class_riesgo:
+        pob_riesgo.append(SumCount(dq, 'n_riesgo', x, 'Sum'))
+    for x in class_riesgo:
+        qm_riesgo.append(SumCount(dq, 'n_riesgo', x, 'Count'))
+    for i in pob_riesgo:
+        percent_pob.append(round((i*100/total), 2))
 
 
     if query != None:
@@ -97,6 +102,9 @@ def webmap(request):
             Q(distrito__icontains=query) | Q(nom_ccpp__icontains=query))
         data = FS.PublicSerializer(dq)
         total = pobTotal(dq)
+        pob_riesgo = []
+        qm_riesgo = []
+        percent_pob = []
         for x in class_riesgo: 
             pob_riesgo.append(SumCount(dq,'n_riesgo',x,'Sum'))
         for x in class_riesgo: 
@@ -109,7 +117,7 @@ def webmap(request):
         m = SumCount(dq, "n_riesgo", 'Medio', 'Sum')
         l = SumCount(dq, "n_riesgo", 'Bajo', 'Sum')
         nombre = query.capitalize()
-        table = list(zip(class_riesgo, qm_riesgo, pob_riesgo, percent_pob,colores))
+        # table_riesgo = list(zip(class_riesgo, qm_riesgo, pob_riesgo, percent_pob,colores_riesgo))
     
     vh = SumCount(dq, "n_riesgo", 'Muy Alto', 'Sum')
     h = SumCount(dq, "n_riesgo", 'Alto', 'Sum')
@@ -118,26 +126,21 @@ def webmap(request):
    
     total = pobTotal(dq)
 
+
+
+    
     total_manzana = sum(qm_riesgo)
     total_porcentaje = round(sum(percent_pob),0)
-
-    for x in class_riesgo:
-        pob_riesgo.append(SumCount(dq, 'n_riesgo', x, 'Sum'))
-    for x in class_riesgo:
-        qm_riesgo.append(SumCount(dq, 'n_riesgo', x, 'Count'))
-    for i in pob_riesgo:
-        percent_pob.append(round((i*100/total), 2))
-    
     
 
 
-    table = list(zip(class_riesgo,qm_riesgo,pob_riesgo,percent_pob,colores))
+    table_riesgo = list(zip(class_riesgo,qm_riesgo,pob_riesgo,percent_pob,colores_riesgo))
     print(qm_riesgo, percent_pob)
 
     if len(dq) >= 1:
         return render(request, r'dashboard/geoportal.html', {
             'data': data,
-            'info':table,
+            'info':table_riesgo,
             'vh': vh,
             'h': h,
             'm': m,

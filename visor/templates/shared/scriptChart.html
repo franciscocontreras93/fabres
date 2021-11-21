@@ -3,19 +3,40 @@
     Chart.defaults.global.defaultFontFamily =
         '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
     Chart.defaults.global.defaultFontColor = '#292b2c';
+    // Chart.plugins.register(ChartDataLabels);
+    Chart.helpers.merge(Chart.defaults.global.plugins.datalabels, {
+    color: '#000',
+    display: false
+    });
 
-    // Bar Chart Example
+     function retPercent(arg){
+     total = '{{total}}'
+     op = arg*100/total
+     // console.log(typeof(op))
+     return op.toFixed(1)
+     }
 
     const labels = ["Bajo", "Medio", "Alto", "Muy Alto"]   
-    var cbar = document.getElementById("BarChart");
-    var cpie = document.getElementById("PieChart");
-
-    var BarChart = new Chart(cbar, {
+     // SECTION INDICADORES CHARTS
+    var BarChart = new Chart(document.getElementById("BarChart"), {
         type: 'bar',
         data: {
             labels: labels,
             datasets: [{
-                label: "Total Pob:",
+                datalabels: {
+                    color: function(context) {
+                    return context.dataset.backgroundColor;
+                    },
+                    display: true,
+                    font: {
+                        weight: 'bold'
+                    },
+                    anchor: 'end',
+                    offset: 2,
+                    align: 'end'
+
+                },
+                label: "Total Pob ",
                 backgroundColor: ["#198754","#ffc107","#ff6a00","#dc3545"],
                 borderColor: "rgba(2,117,216,1)",
                 data: ['{{l}}', '{{m}}', '{{h}}', '{{vh}}']
@@ -34,16 +55,8 @@
                     }
                 }],
                 yAxes: [{
-                    ticks: {
-                        min: Math.min('{{l}}', '{{m}}', '{{h}}',
-                        '{{vh}}')-Math.ceil(Math.min('{{l}}', '{{m}}', '{{h}}', '{{vh}}')),
-                        max: Math.ceil(Math.max('{{l}}', '{{m}}', '{{h}}', '{{vh}}')/500)*500
-                        ,
-                        maxTicksLimit: 6
-                    },
-                    gridLines: {
-                        display: true,
-                    }
+                    display: true,
+                    
                 }],
             },
             legend: {
@@ -53,23 +66,31 @@
             
         }
     });
-    
-    function retPercent(arg){
-        total = '{{total}}'
-        op = arg*100/total
-        // console.log(typeof(op))
-        return op.toFixed(1)
-    }
 
-    
-
-    
-
-     var PieChart = new Chart(cpie, {
+    var PieChart = new Chart(document.getElementById("PieChart"), {
         type: 'pie',
         data: {
             labels: labels,
             datasets: [{
+                datalabels: {
+                    // backgroundColor: function(context) {
+                    // return context.dataset.backgroundColor;
+                    // },
+                    // borderColor: '#fff',
+                    // borderRadius: 25,
+                    // borderWidth: 2,
+                    color: 'white',
+                    display: true,
+                    font: {
+                    size:11,
+                    weight: 'bold'
+                    },
+                    anchor: 'start',
+                    align: 'end',
+                    offset: 30,
+                    clamp: true
+
+                },
                 label: "Total Pob:",
                 backgroundColor: ["#198754","#ffc107","#ff6a00","#dc3545"],
                 borderColor: "rgba(2,117,216,1)",
@@ -86,16 +107,14 @@
             maintainAspectratio:false,
            
             legend: {
-                display: true
+                display: true,
+                position: 'right'
             },
             
             
         }
     });
-    const BarOptions = {
-        type: "doughnut",
-        data: ['{{l}}', '{{m}}', '{{h}}', '{{vh}}'],
-    }
     
-
+    
+   
 </script>

@@ -74,20 +74,29 @@
         // })
 
         // function get_distrito(q){
-        //     console.log("ACA FUNCIONA BIEN");
-        //     console.log(q)
+        // console.log("ACA FUNCIONA BIEN");
+        // console.log(q)
 
-        //     $.ajax({
-        //         url: `http://127.0.0.1:8000/rest/fabres/`+q,
-        //         type: 'GET',
-        //         success: function(json){
-        //             // document.querySelector('#search').
-        //             // console.log(json)
-        //             console.log('some'),
-        //             data2 = json
-        //         }
+        // $.ajax({
+        // url: `http://127.0.0.1:8000/geoportal/fabres/`+q,
+        // type: 'GET',
+        // error: function (err) {
 
-        //     })
+        // alert("Error: " + err.responseText.toString())
+
+        // },
+        // success: function(json){
+        // // document.querySelector('#search').
+        // // console.log(json)
+        // console.log(json),
+        // layerAjax = L.geoJson(json)
+        // map.fitBounds(layerAjax.getBounds());
+        // layerAjax = null
+
+
+        // }
+
+        // })
         // }
 
 
@@ -165,328 +174,293 @@
     distritos = '{{data|safe}}'
     data = JSON.parse(distritos)
 
-    var covid_riesgo_lyr = new L.geoJson(data, {
+    var layer = new L.geoJson(data, {
         attribution: '',
         interactive: true,
         onEachFeature: pop_risk,
         pane: 'dist_pane',
         dataVar: 'distritos',
         layerName: 'Escenario de Riesgos',
-        style: function (feature) {
-            switch (String(feature.properties['n_riesgo'])) {
-                case "Muy Alto":
-                    return {
-                        color: '#d7191c',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case "Alto":
-                    return {
-                        color: '#fe9000',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case "Medio":
-                    return {
-                        color: '#ffe900',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case "Bajo":
-                    return {
-                        color: '#1a9641',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-            }
+        style: {
+            color: '#d7191c',
+            stroke: '',
+            fillOpacity: '0.50'
         }
 
 
     }).addTo(map)
 
-    map.fitBounds(covid_riesgo_lyr.getBounds());
-
-
-    var dens_pob_lyr = new L.geoJson(data, {
-        attribution: '',
-        interactive: true,
-        onEachFeature: pop_risk,
-        pane: 'dist_pane',
-        dataVar: 'distritos',
-        layerName: 'Escenario de Riesgos',
-        style: function (feature) {
-            switch (String(feature.properties['q_densid'])) {
-                case "Q5":
-                    return {
-                        color: '#440154',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case "Q4":
-                    return {
-                        color: '#3a528b',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case "Q3":
-                    return {
-                        color: '#20908d',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case "Q2":
-                    return {
-                        color: '#5dc962',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case "Q1":
-                    return {
-                        color: '#fde725',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-            }
+    function styleRiesgo(){
+        layer.setStyle(function (feature) {
+        switch (String(feature.properties['n_riesgo'])) {
+        case "Muy Alto":
+        return {
+        color: '#d7191c',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case "Alto":
+        return {
+        color: '#fe9000',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case "Medio":
+        return {
+        color: '#ffe900',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case "Bajo":
+        return {
+        color: '#1a9641',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
         }
+        })
 
-
-    })
-    var pob_nbi_lyr = new L.geoJson(data, {
-        attribution: '',
-        interactive: true,
-        onEachFeature: pop_risk,
-        pane: 'dist_pane',
-        dataVar: 'distritos',
-        layerName: 'Escenario de Riesgos',
-        style: function (feature) {
-            switch (String(feature.properties['q_propnbi'])) {
-                case "Q5":
-                    return {
-                        color: '#9f4f00',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case "Q4":
-                    return {
-                        color: '#db7909',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case "Q3":
-                    return {
-                        color: '#e7a612',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case "Q2":
-                    return {
-                        color: '#f3d31b',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case "Q1":
-                    return {
-                        color: '#ffff24',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-            }
+    }
+    function styleDensidad(){
+        layer.setStyle(function (feature) {
+        switch (String(feature.properties['q_densid'])) {
+        case "Q5":
+        return {
+        color: '#440154',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case "Q4":
+        return {
+        color: '#3a528b',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case "Q3":
+        return {
+        color: '#20908d',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case "Q2":
+        return {
+        color: '#5dc962',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case "Q1":
+        return {
+        color: '#fde725',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
         }
-
-
-    })
-    var nivel_contagio_lyr = new L.geoJson(data, {
-        attribution: '',
-        interactive: true,
-        onEachFeature: pop_risk,
-        pane: 'dist_pane',
-        dataVar: 'distritos',
-        layerName: 'Escenario de Riesgos',
-        style: function (feature) {
-            switch (String(feature.properties['q_mcalor'])) {
-                case 'Q5':
-                    return {
-                        color: '#d7191c',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q4':
-                    return {
-                        color: '#d7191c',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q3':
-                    return {
-                        color: '#fea600',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q2':
-                    return {
-                        color: '#fea600',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q1':
-                    return {
-                        color: '#c7e800',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'N/D':
-                    return {
-                        color: '#c7e800',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-
-            }
+        })
+    }
+    function styleNbi(){
+        layer.setStyle(function (feature) {
+        switch (String(feature.properties['q_propnbi'])) {
+        case "Q5":
+        return {
+        color: '#9f4f00',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case "Q4":
+        return {
+        color: '#db7909',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case "Q3":
+        return {
+        color: '#e7a612',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case "Q2":
+        return {
+        color: '#f3d31b',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case "Q1":
+        return {
+        color: '#ffff24',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
         }
+        })
+    }
+    function styleContagios(){
+        layer.setStyle(function (feature) {
+        switch (String(feature.properties['q_mcalor'])) {
+        case 'Q5':
+        return {
+        color: '#d7191c',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q4':
+        return {
+        color: '#d7191c',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q3':
+        return {
+        color: '#fea600',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q2':
+        return {
+        color: '#fea600',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q1':
+        return {
+        color: '#c7e800',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'N/D':
+        return {
+        color: '#c7e800',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
 
-
-    })
-    var q30_59_lyr = new L.geoJson(data, {
-        attribution: '',
-        interactive: true,
-        onEachFeature: pop_risk,
-        pane: 'dist_pane',
-        dataVar: 'distritos',
-        layerName: 'Escenario de Riesgos',
-        style: function (feature) {
-            switch (String(feature.properties['q_30_a_59'])) {
-                case 'Q5':
-                    return {
-                        color: '#d7191c',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q4':
-                    return {
-                        color: '#fd7a00',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q3':
-                    return {
-                        color: '#ffff00',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q2':
-                    return {
-                        color: '#abdd00',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q1':
-                    return {
-                        color: '#1a9641',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-
-
-            }
         }
-
-
-    })
-    var q60_lyr = new L.geoJson(data, {
-        attribution: '',
-        interactive: true,
-        onEachFeature: pop_risk,
-        pane: 'dist_pane',
-        dataVar: 'distritos',
-        layerName: 'Escenario de Riesgos',
-        style: function (feature) {
-            switch (String(feature.properties['q_pob60'])) {
-                case 'Q5':
-                    return {
-                        color: '#d7191c',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q4':
-                    return {
-                        color: '#fd7a00',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q3':
-                    return {
-                        color: '#ffff00',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q2':
-                    return {
-                        color: '#abdd00',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q1':
-                    return {
-                        color: '#1a9641',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-
-
-            }
         }
+)
+    }
+    function style3059(){
+        layer.setStyle(function (feature) {
+        switch (String(feature.properties['q_30_a_59'])) {
+        case 'Q5':
+        return {
+        color: '#d7191c',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q4':
+        return {
+        color: '#fd7a00',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q3':
+        return {
+        color: '#ffff00',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q2':
+        return {
+        color: '#abdd00',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q1':
+        return {
+        color: '#1a9641',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
 
 
-    })
-    var qMercado_lyr = new L.geoJson(data, {
-        attribution: '',
-        interactive: true,
-        onEachFeature: pop_risk,
-        pane: 'dist_pane',
-        dataVar: 'distritos',
-        layerName: 'Escenario de Riesgos',
-        style: function (feature) {
-            switch (String(feature.properties['q_mercado'])) {
-                case 'Q5':
-                    return {
-                        color: '#ff0000',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q4':
-                    return {
-                        color: '#ffa962',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q3':
-                    return {
-                        color: '#d5f23e',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q2':
-                    return {
-                        color: '#aef289',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-                case 'Q1':
-                    return {
-                        color: '#bebebe',
-                            fillOpacity: '0.60',
-                            stroke: ''
-                    };
-
-
-            }
         }
+        }
+)
+    }
+    function style60(){
+        layer.setStyle(function (feature) {
+        switch (String(feature.properties['q_pob60'])) {
+        case 'Q5':
+        return {
+        color: '#d7191c',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q4':
+        return {
+        color: '#fd7a00',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q3':
+        return {
+        color: '#ffff00',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q2':
+        return {
+        color: '#abdd00',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q1':
+        return {
+        color: '#1a9641',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
 
 
-    })
+        }
+        })
+    }
+    function styleMercados(){
+        layer.setStyle(function (feature) {
+        switch (String(feature.properties['q_mercado'])) {
+        case 'Q5':
+        return {
+        color: '#ff0000',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q4':
+        return {
+        color: '#ffa962',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q3':
+        return {
+        color: '#d5f23e',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q2':
+        return {
+        color: '#aef289',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
+        case 'Q1':
+        return {
+        color: '#bebebe',
+        fillOpacity: '0.60',
+        stroke: ''
+        };
 
 
-
+        }
+        })
+    }
+    function resetStyle(){
+         layer.setStyle({
+            color: '#d7191c',
+            stroke: '',
+            fillOpacity: '0.50'
+        })
+    }
+    
+    map.fitBounds(layer.getBounds());
 
 
     var basemaps = {
@@ -495,17 +469,10 @@
     };
 
     var theme = {
-        "Escenario Riesgo Covid-19: ": covid_riesgo_lyr,
-        "Densidad Poblacional: ": dens_pob_lyr,
-        "Poblacion NBI: ": pob_nbi_lyr,
-        "Areas de Contagio (EN DESARROLLO)": nivel_contagio_lyr,
-        "Dist. Pob 30 a 59:": q30_59_lyr,
-        "Dist. Mayores de 60:": q60_lyr,
-        "Areas de Influencia Publica:": qMercado_lyr,
-
+        "Distrito: '{{nombre}}' ": layer
     }
 
-    L.control.layers(basemaps, theme).addTo(map)
+    L.control.layers(basemaps,theme).addTo(map)
      L.control.locate({
      locateOptions: {
      maxZoom: 19
@@ -515,25 +482,33 @@
     var sidebar = L.control.sidebar({ container: 'sidebar', position:'left'}).addTo(map);
 
    
-    //  L.control.custom({
-    //  position: 'topright',
-    //  content : `<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal1"><i
-    //          class="fas fa-chart-bar"> </i></button>`,
-    //  classes : 'btn-group-vertical btn-group-sm',
-    //  style :
-    //  {
-    //  margin: '10px',
-    //  padding: '0px 0 0 0',
-    //  cursor: 'pointer',
-    //  }
-    //  })
-    //  .addTo(map);
+     L.control.custom({
+     position: 'topright',
+     content : `
+     <button type="button" class="btn btn-dark" onclick="styleRiesgo()"><i class="fas fa-virus"></i></button>
+    <button type="button" class="btn btn-dark" onclick="styleDensidad()"><i class="fas fa-users"></i></button>
+    <button type="button" class="btn btn-dark" onclick="styleNbi()"><i class="fas fa-hand-holding-water"></i></button>
+    <button type="button" class="btn btn-dark" onclick="styleContagios()"><i class="fas fa-biohazard"></i></button>
+    <button type="button" class="btn btn-dark" onclick="style3059()"><i class="fas fa-walking"></i></button>
+    <button type="button" class="btn btn-dark" onclick="style60()"><i class="fas fa-blind"></i></button>
+    <button type="button" class="btn btn-dark" onclick="styleMercados()"><i class="fas fa-store"></i></button>
+    <button type="button" class="btn btn-dark mt-3" onclick="resetStyle()"><i class="fas fa-undo-alt"></i></button>
+    `,
+     classes : 'btn-group-vertical btn-group-sm',
+     style :
+     {
+     margin: '10px',
+     padding: '0px 0 0 0',
+     cursor: 'pointer',
+     }
+     })
+     .addTo(map);
 
     
 
 
 
-
+     
 
 
 

@@ -16,11 +16,11 @@ def re_distritos(request,distrito=False):
     # distrito = 'LURICOCHA' # ! UNCOMMENT TO DEBUG
     if not distrito:        
         feat = model.objects.all()
-        result = FS.PublicSerializer(feat)
+        result = FS.BaseSerializer(feat)
     elif distrito:
         dist = distrito.upper()
         feat = model.objects.filter(distrito=dist)
-        result = FS.PublicSerializer(feat)
+        result = FS.BaseSerializer(feat)
         
     return HttpResponse(result, content_type='application/json')
 
@@ -34,7 +34,7 @@ def re_ccpp(request , nom_ccpp=False):
         elif nom_ccpp:
             nom_ccpp = nom_ccpp.upper()
             feat = model.objects.filter(nom_ccpp=nom_ccpp)
-            result = FS.PublicSerializer(feat)
+            result = FS.BaseSerializer(feat)
             
         return HttpResponse(result, content_type='application/json')
     except:
@@ -49,7 +49,7 @@ def re_manzana(request,idmanzana=False):
         result = 'ERROR: Should pass an ID'
     elif idmanzana:
         feat = model.objects.filter(idmanzana=idmanzana)
-        result = FS.PublicSerializer(feat)
+        result = FS.BaseSerializer(feat)
         
     return HttpResponse(result, content_type='application/json')
 
@@ -65,7 +65,7 @@ def re_query(request,width=False):
     pnt = GEOSGeometry(f'POINT({lon} {lat})')
     buffer = pnt.buffer(width/100000,quadsegs=8)
     feat = model.objects.filter(geom__intersects=buffer)
-    result = FS.PublicSerializer(feat)
+    result = FS.BaseSerializer(feat)
     return HttpResponse(result, content_type='application/json')
 
 
