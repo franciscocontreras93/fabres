@@ -76,13 +76,22 @@ def index(request):
     })
 
 @login_required
+def getDistrito(request): 
+    query = request.GET.get('search')
+    dq = dq.filter(Q(distrito__icontains=query) | Q(nom_ccpp__icontains=query))
+
+    return render(request, 'dashboard/geoportal.html', {
+        'data': dq,
+    })
+
+
+@login_required
 def webmap(request):
     query = request.GET.get('search')
     dq = model.objects.all()
     nombre = ''
     class_riesgo = ['Muy Alto', 'Alto', 'Medio', 'Bajo']
-    colores_riesgo = ["#dc3545c2", "#ff6a00c2", "#ffc107c2",
-               "#198754c2"]
+    colores_riesgo = ["#dc3545c2", "#ff6a00c2", "#ffc107c2","#198754c2"]
     pob_riesgo = []
     qm_riesgo = []
     percent_pob = []
@@ -96,6 +105,10 @@ def webmap(request):
     for i in pob_riesgo:
         percent_pob.append(round((i*100/total), 2))
 
+
+    if request.is_ajax :
+        print('AJAX')
+    
 
     if query != None:
         dq = dq.filter(

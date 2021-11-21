@@ -78,7 +78,7 @@
         // console.log(q)
 
         // $.ajax({
-        // url: `http://127.0.0.1:8000/geoportal/fabres/`+q,
+        // url: `http://127.0.0.1:8000/rest/fabres/` + q,
         // type: 'GET',
         // error: function (err) {
 
@@ -485,14 +485,15 @@
      L.control.custom({
      position: 'topright',
      content : `
-     <button type="button" class="btn btn-dark" onclick="styleRiesgo()"><i class="fas fa-virus"></i></button>
-    <button type="button" class="btn btn-dark" onclick="styleDensidad()"><i class="fas fa-users"></i></button>
-    <button type="button" class="btn btn-dark" onclick="styleNbi()"><i class="fas fa-hand-holding-water"></i></button>
-    <button type="button" class="btn btn-dark" onclick="styleContagios()"><i class="fas fa-biohazard"></i></button>
-    <button type="button" class="btn btn-dark" onclick="style3059()"><i class="fas fa-walking"></i></button>
-    <button type="button" class="btn btn-dark" onclick="style60()"><i class="fas fa-blind"></i></button>
-    <button type="button" class="btn btn-dark" onclick="styleMercados()"><i class="fas fa-store"></i></button>
-    <button type="button" class="btn btn-dark mt-3" onclick="resetStyle()"><i class="fas fa-undo-alt"></i></button>
+     <button type="button" class="btn btn-dark" data-bs-toggle="button" onclick="styleRiesgo()"><i
+             class="fas fa-virus"></i></button>
+    <button type="button" class="btn btn-dark" data-bs-toggle="button"   onclick="styleDensidad()"><i class="fas fa-users"></i></button>
+    <button type="button" class="btn btn-dark" data-bs-toggle="button"  onclick="styleNbi()"><i class="fas fa-hand-holding-water"></i></button>
+    <button type="button" class="btn btn-dark" data-bs-toggle="button"  onclick="styleContagios()"><i class="fas fa-biohazard"></i></button>
+    <button type="button" class="btn btn-dark" data-bs-toggle="button"  onclick="style3059()"><i class="fas fa-walking"></i></button>
+    <button type="button" class="btn btn-dark"  data-bs-toggle="button" onclick="style60()"><i class="fas fa-blind"></i></button>
+    <button type="button" class="btn btn-dark" data-bs-toggle="button"  onclick="styleMercados()"><i class="fas fa-store"></i></button>
+    <button type="button" class="btn btn-dark mt-3" data-bs-toggle="button"  onclick="resetStyle()"><i class="fas fa-undo-alt"></i></button>
     `,
      classes : 'btn-group-vertical btn-group-sm',
      style :
