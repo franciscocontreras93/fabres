@@ -104,10 +104,6 @@ def webmap(request):
         qm_riesgo.append(SumCount(dq, 'n_riesgo', x, 'Count'))
     for i in pob_riesgo:
         percent_pob.append(round((i*100/total), 2))
-
-
-    if request.is_ajax :
-        print('AJAX')
     
 
     if query != None:
