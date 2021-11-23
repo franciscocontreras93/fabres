@@ -9,8 +9,8 @@ media
 
 
 
-/settings_local.py
-/asgi.py
+settings_local.py
+asgi.py
 
 
 
