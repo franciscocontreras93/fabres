@@ -6,7 +6,15 @@ __pycache__
 db.sqlite3
 media
 /data
-fabres/settings.py
+
+
+
+/settings_local.py
+/asgi.py
+
+
+
+
 
 # Backup files # 
 *.bak 
