@@ -6,27 +6,27 @@
     <div class="leaflet-sidebar-tabs">
         <ul role="tablist ">
             <li>
-                <a href="#risk" role="tab" data-bs-toggle="tooltip" data-bs-placement="top" title="Indicadores COVID-19"><i
-                        class="fas fa-virus"></i></a>
+                <a href="#risk" role="tab" data-bs-toggle="tooltip" data-bs-placement="top" title="Indicadores COVID-19"
+                    onclick="styleRiesgo()"><i class="fas fa-virus"></i></a>
             </li>
             <li>
-                <a href="#density" role="tab" data-bs-placement="top" title="Indicadores Densidad Poblacional"><i
-                        class="fas fa-users"></i></a>
+                <a href="#density" role="tab" data-bs-placement="top" title="Indicadores Densidad Poblacional"
+                    onclick="styleDensidad()"><i class="fas fa-users" "></i></a>
             </li>
             <li class="">
-                <a href="#nbi" role="tab" data-bs-placement="top" title="Indicadores NBI"><i
-                        class="fas fa-hand-holding-water"></i></a>
+                <a href=" #nbi" role="tab" data-bs-placement="top" title="Indicadores NBI" onclick="styleNbi()"><i
+                            class="fas fa-hand-holding-water"></i></a>
             </li>
             <!-- <li class="">
                 <a href="#hazard" role="tab"><i class="fas fa-biohazard"></i></a>
             </li> -->
             <li class="">
-                <a href="#3059" role="tab" data-bs-placement="top" title="Indicadores Población de 30 a 59 Años"><i
-                        class="fas fa-walking"></i></a>
+                <a href="#3059" role="tab" data-bs-placement="top" title="Indicadores Población de 30 a 59 Años"
+                    onclick="style3059()"><i class="fas fa-walking"></i></a>
             </li>
             <li class="">
-                <a href="#60" role="tab" data-bs-placement="top" title="Indicadores de 60 Años a mas"><i
-                        class="fas fa-blind"></i></a>
+                <a href="#60" role="tab" data-bs-placement="top" title="Indicadores de 60 Años a mas"
+                    onclick="style60()"><i class="fas fa-blind"></i></a>
             </li>
             <!-- <li class="">
                 <a href="#public" role="tab"><i class="fas fa-store"></i></a>
@@ -43,12 +43,13 @@
 
     <!-- Tab panes -->
     <div class="leaflet-sidebar-content" id="panel-content">
+        {% comment %} PANEL RIESGO COVID {% endcomment %}
         <div class="leaflet-sidebar-pane" id="risk">
             <h1 class="leaflet-sidebar-header">
                 Riesgo de Contagio COVID-19
                 <span class="leaflet-sidebar-close"><i class="fas fa-times"></i></span>
             </h1>
-            
+
 
             <div class="container-fluid p-2">
                 <div class="d-flex">
@@ -59,14 +60,14 @@
                         {% else %}
                         <h4 class="fw-bolder"> Total Estudio | {{total | intcomma}} Hab</h4>
 
-                        {% endif %}                       
+                        {% endif %}
                     </div>
                 </div>
-                
-                
+
+
                 <div class="card shadow mt-1">
                     <div class="card-header">
-                        Indicadores de Riesgo | {{nombre}}
+                        Indicadores de Riesgo COVID-19 | {{nombre}}
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple" class="table">
@@ -80,9 +81,9 @@
                             </thead>
                             <tbody>
 
-                                {% for e in info %}
+                                {% for e in riesgo %}
                                 <tr>
-                                    <td style="background-color: {{e.4}}">{{e.0}}</td>
+                                    <td style="background-color: {{e.4}}" class="fw-bolder">{{e.0}}</td>
                                     <td>{{e.1}}</td>
                                     <td>{{e.2 | intcomma}}</td>
                                     <td>{{e.3}} %</td>
@@ -92,7 +93,7 @@
                             <tfooter>
                                 <tr>
                                     <th>Total</th>
-                                    <th>{{total_manzanas}}</th>
+                                    <th>{{total_manzana}}</th>
                                     <th>{{total | intcomma}}</th>
                                     <th>{{total_porcentaje}}%</th>
                                 </tr>
@@ -116,57 +117,92 @@
                     <div class="card-body"><canvas id="PieChart" width="100%" height="40"></canvas></div>
 
                 </div>
-                
+
 
             </div>
 
         </div>
+        {% comment %} PANEL DENSIDAD POBLACIONAL {% endcomment %}
         <div class="leaflet-sidebar-pane" id="density">
             <h1 class="leaflet-sidebar-header">
                 Densidad Poblacional
                 <span class="leaflet-sidebar-close"><i class="fas fa-times"></i></i></span>
             </h1>
-            
 
             <div class="container-fluid p-2">
                 <div class="d-flex">
                     <div class="flex-row">
-                        <!-- <h3 class="fw-bolder"> TITULO</h3> -->
-                        <!-- <form class="d-none d-md-inline-block form-inline ms-auto my-2 my-md-0" method="get">
-                            <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Buscar..." aria-label="Buscar..."
-                                    aria-describedby="btnNavbarSearch" name='search' />
-                                <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i
-                                        class="fas fa-search"></i></button>
-                            </div>
-                        </form> -->
-                        
+                        {% if nombre %}
+                        <h4 class="fw-bolder">{{nombre}} | {{total | intcomma}} Hab</h4>
+
+                        {% else %}
+                        <h4 class="fw-bolder"> Total Estudio | {{total | intcomma}} Hab</h4>
+
+                        {% endif %}
                     </div>
                 </div>
 
-                <div class="card shadow mt-3">
+                <div class="card shadow mt-1">
                     <div class="card-header">
-                        <i class="fas fa-chart-bar me-2"> </i>Indicadores
+                        Indicadores de Densidad Poblacional | {{nombre}}
                     </div>
                     <div class="card-body">
-                        <div class="card-body"><canvas id="SideBarChartRisk" width="100%" height="40"></canvas></div>
+                        <table id="datatablesSimple" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Simbolo</th>
+                                    <th>Manzanas</th>
+                                    <th>Poblacion</th>
+                                    <th>%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for e in densidad %}
+                                <tr>
+                                    <td style="background-color: {{e.4}}" class="fw-bolder">{{e.0}}</td>
+                                    <td>{{e.1}}</td>
+                                    <td>{{e.2 | intcomma}}</td>
+                                    <td>{{e.3}} %</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfooter>
+                                <tr>
+                                    <th>Total</th>
+                                    <th>{{total_manzana}}</th>
+                                    <th>{{total | intcomma}}</th>
+                                    <th>{{total_porcentaje}}%</th>
+                                </tr>
+                            </tfooter>
+                        </table>
                     </div>
                 </div>
-                <div class="card mb-4 shadow mt-3">
-                    <div class="card-header">
-                        <i class="fas fa-chart-pie"></i>
-                        Porcentaje en Riesgo
+
+
+                <div class="container-fluid p-2">
+                    <div class="card shadow mt-3">
+                        <div class="card-header">
+                            <i class="fas fa-chart-bar me-2"> </i>Indicadores
+                        </div>
+                        <div class="card-body">
+                            <div class="card-body"><canvas id="BarChartDensidad" width="100%" height="40"></canvas>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body"><canvas id="PieChart" width="100%" height="40"></canvas></div>
+                    <div class="card mb-4 shadow mt-3">
+                        <div class="card-header">
+                            <i class="fas fa-chart-pie"></i>
+                            Porcentaje en Riesgo
+                        </div>
+                        <div class="card-body"><canvas id="PieChartDensidad" width="100%" height="40"></canvas></div>
+
+                    </div>
 
                 </div>
 
             </div>
 
         </div>
-
+        {% comment %} PANEL NBI {% endcomment %}
     </div>
-</div>
-
-
-
