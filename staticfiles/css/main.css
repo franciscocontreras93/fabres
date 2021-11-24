@@ -44,6 +44,9 @@
     --focus-ring: none;
 }
 
+::placeholder {
+    color: white !important;
+}
 
 .body {
     background-color: var(--surface-200);
@@ -62,3 +65,4 @@
     background-color: white;
     
 }
+

@@ -107,7 +107,8 @@
 
     map.attributionControl.setPrefix(
         `Desarrollado por: <a href="https://www.linkedin.com/in/geofrancisco/" title="GeoSIG" "target=" _blank">Francisco
-        Contreras &middot Rafael Vasquez </a>`
+        Contreras </a>&middot<a href="https://www.linkedin.com/in/aprovambrafaelvasquez/" title="APROVAMB" "target="
+            _blank">Rafael Vásquez </a>`
     );
    
     map.createPane('pane_baseMap');
@@ -485,8 +486,8 @@
      L.control.custom({
      position: 'topright',
      content : `
-     <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Riesgo COVID-19"
-         onclick="styleRiesgo()"><i class="fas fa-virus"></i></button>
+     <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+         title="Escenario de Riesgo por COVID-19" onclick="styleRiesgo()"><i class="fas fa-virus"></i></button>
      <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top"
          title="Densidad Poblacional" onclick="styleDensidad()"><i class="fas fa-users"></i></button>
      <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top"

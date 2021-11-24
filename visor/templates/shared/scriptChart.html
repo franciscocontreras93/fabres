@@ -130,9 +130,9 @@
         weight: 'bold'
         },
         anchor: 'end',
-        offset: 0,
-        align: 'end',
-        clip: true
+        offset: -16,
+        align: 'start',
+        clip: false
 
         },
         label: "Total Pob ",
@@ -172,19 +172,30 @@
         labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
         datasets: [{
         datalabels: {
-        color: 'white',
+        // backgroundColor: function(context) {
+        //     return context.dataset.backgroundColor
+        // ;
+        // },
+        backgroundColor: '#fff',
+        borderColor: '#fff',
+        borderRadius: 100,
+        // borderWidth: 2,
+        color: 'black',
+        formatter: function(value){
+            return `${value}`
+        } ,
         display: true,
         font: {
-        size:11,
+        size:9,
         weight: 'bold'
         },
         anchor: 'start',
         align: 'end',
-        offset: 30,
+        offset: 25,
         clamp: true
 
         },
-        label: "Total Pob:",
+        label: "%",
         backgroundColor: ['#fde725c2', '#5dc962c2', '#20908dc2', '#3a528bc2', '#440154c2'],
         borderColor: "rgba(2,117,216,1)",
         data: [retPercent('{{densidad_q1}}'), retPercent('{{densidad_q2}}'), retPercent('{{densidad_q3}}'),
@@ -208,4 +219,322 @@
         }
 
     })
+
+    var BarChartNbi = new Chart(document.getElementById("BarChartNbi"), {
+        type: 'bar',
+        data: {
+        labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
+        datasets: [{
+        datalabels: {
+        color: function(context) {
+        return context.dataset.backgroundColor;
+        },
+        display: true,
+        font: {
+        weight: 'bold'
+        },
+        anchor: 'end',
+        offset: -16,
+        align: 'start',
+        clip: false
+
+        },
+        label: "Total Pob ",
+        backgroundColor: ['#fde725c2', '#5dc962c2', '#20908dc2', '#3a528bc2', '#440154c2'],
+        borderColor: "rgba(2,117,216,1)",
+        data: ['{{nbi_q1}}', '{{nbi_q2}}', '{{nbi_q3}}', '{{nbi_q4}}','{{nbi_q5}}']
+        }],
+        },
+        options: {
+        responsive: true,
+        maintainAspectratio:false,
+        scales: {
+        xAxes: [{
+        gridLines: {
+        display: false
+        },
+        ticks: {
+        maxTicksLimit: 6
+        }
+        }],
+        yAxes: [{
+        display: true,
+
+        }],
+        },
+        legend: {
+        display: false
+        },
+
+
+        }
+    })
+    
+    var PieChartNbi = new Chart(document.getElementById("PieChartNbi"), {
+        type: 'pie',
+        data: {
+        labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
+        datasets: [{
+        datalabels: {
+        // backgroundColor: function(context) {
+        //     return context.dataset.backgroundColor
+        // ;
+        // },
+        backgroundColor: '#fff',
+        borderColor: '#fff',
+        borderRadius: 100,
+        // borderWidth: 2,
+        color: 'black',
+        formatter: function(value){
+            return `${value} %`
+        } ,
+        display: true,
+        font: {
+        size:9,
+        weight: 'bold'
+        },
+        anchor: 'start',
+        align: 'end',
+        offset: 25,
+        clamp: true
+
+        },
+        label: "%",
+        backgroundColor: ['#fde725c2', '#5dc962c2', '#20908dc2', '#3a528bc2', '#440154c2'],
+        borderColor: "rgba(2,117,216,1)",
+        data: [retPercent('{{nbi_q1}}'), retPercent('{{nbi_q2}}'), retPercent('{{nbi_q3}}'),
+        retPercent('{{nbi_q4}}'),retPercent('{{nbi_q5}}')],
+        borderWidth:2,
+        borderColor:'#fff',
+
+        }],
+        hoverOffset:20
+        },
+        options: {
+        responsive: true,
+        maintainAspectratio:false,
+
+        legend: {
+        display: true,
+        position: 'right'
+        },
+
+
+        }
+
+    })
+    
+    var BarChart3059 = new Chart(document.getElementById("BarChart3059"), {
+    type: 'bar',
+    data: {
+    labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
+    datasets: [{
+    datalabels: {
+    color: function(context) {
+    return context.dataset.backgroundColor;
+    },
+    display: true,
+    font: {
+    weight: 'bold'
+    },
+    anchor: 'end',
+    offset: -16,
+    align: 'start',
+    clip: true
+
+    },
+    label: "Total Pob ",
+    backgroundColor: [
+    '#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'],
+    borderColor: "rgba(2,117,216,1)",
+    data: ['{{d3059_q1}}', '{{d3059_q2}}', '{{d3059_q3}}', '{{d3059_q4}}','{{d3059_q5}}']
+    }],
+    },
+    options: {
+    responsive: true,
+    maintainAspectratio:false,
+    scales: {
+    xAxes: [{
+    gridLines: {
+    display: false
+    },
+    ticks: {
+    maxTicksLimit: 6
+    }
+    }],
+    yAxes: [{
+    display: true,
+
+    }],
+    },
+    legend: {
+    display: false
+    },
+
+
+    }
+    })
+
+    var PieChart3059 = new Chart(document.getElementById("PieChart3059"), {
+    type: 'pie',
+    data: {
+    labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
+    datasets: [{
+    datalabels: {
+    // backgroundColor: function(context) {
+    // return context.dataset.backgroundColor
+    // ;
+    // },
+    backgroundColor: '#fff',
+    borderColor: '#fff',
+    borderRadius: 100,
+    // borderWidth: 2,
+    color: 'black',
+    formatter: function(value){
+    return `${value} %`
+    } ,
+    display: true,
+    font: {
+    size:9,
+    weight: 'bold'
+    },
+    anchor: 'start',
+    align: 'end',
+    offset: 25,
+    clamp: true
+
+    },
+    label: "%",
+    backgroundColor: ['#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'],
+    borderColor: "rgba(2,117,216,1)",
+    data: [retPercent('{{d3059_q1}}'), retPercent('{{d3059_q2}}'), retPercent('{{d3059_q3}}'),
+    retPercent('{{d3059_q4}}'),retPercent('{{d3059_q5}}')],
+    borderWidth:2,
+    borderColor:'#fff',
+
+    }],
+    hoverOffset:20
+    },
+    options: {
+    responsive: true,
+    maintainAspectratio:false,
+
+    legend: {
+    display: true,
+    position: 'right'
+    },
+
+
+    }
+
+    })
+
+    var BarChart60 = new Chart(document.getElementById("BarChart60"), {
+    type: 'bar',
+    data: {
+    labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
+    datasets: [{
+    datalabels: {
+    color: function(context) {
+    return context.dataset.backgroundColor;
+    },
+    display: true,
+    font: {
+    weight: 'bold'
+    },
+    anchor: 'end',
+    offset: -16,
+    align: 'start',
+    clip: true
+
+    },
+    label: "Total Pob ",
+    backgroundColor: [
+    '#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'],
+    borderColor: "rgba(2,117,216,1)",
+    data: ['{{d60_q1}}', '{{d60_q2}}', '{{d60_q3}}', '{{d60_q4}}','{{d60_q5}}']
+    }],
+    },
+    options: {
+    responsive: true,
+    maintainAspectratio:false,
+    scales: {
+    xAxes: [{
+    gridLines: {
+    display: false
+    },
+    ticks: {
+    maxTicksLimit: 6
+    }
+    }],
+    yAxes: [{
+    display: true,
+
+    }],
+    },
+    legend: {
+    display: false
+    },
+
+
+    }
+    })
+
+    var PieChart60 = new Chart(document.getElementById("PieChart60"), {
+    type: 'pie',
+    data: {
+    labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5'],
+    datasets: [{
+    datalabels: {
+    // backgroundColor: function(context) {
+    // return context.dataset.backgroundColor
+    // ;
+    // },
+    backgroundColor: '#fff',
+    borderColor: '#fff',
+    borderRadius: 100,
+    // borderWidth: 2,
+    color: 'black',
+    formatter: function(value){
+    return `${value} %`
+    } ,
+    display: true,
+    font: {
+    size:9,
+    weight: 'bold'
+    },
+    anchor: 'start',
+    align: 'end',
+    offset: 25,
+    clamp: true
+
+    },
+    label: "%",
+    backgroundColor: ['#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'],
+    borderColor: "rgba(2,117,216,1)",
+    data: [retPercent('{{d60_q1}}'), retPercent('{{d60_q2}}'), retPercent('{{d60_q3}}'),
+    retPercent('{{d60_q4}}'),retPercent('{{d60_q5}}')],
+    borderWidth:2,
+    borderColor:'#fff',
+
+    }],
+    hoverOffset:20
+    },
+    options: {
+    responsive: true,
+    maintainAspectratio:false,
+
+    legend: {
+    display: true,
+    position: 'right'
+    },
+
+
+    }
+
+    })
+
+
+
+
 </script>
