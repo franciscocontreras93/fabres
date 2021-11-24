@@ -286,7 +286,13 @@
         // borderWidth: 2,
         color: 'black',
         formatter: function(value){
-            return `${value} %`
+            console.log(value)
+            if (typeof value === NaN) {
+                 return ``
+            } else {
+                 return `${value} %`
+            }
+            
         } ,
         display: true,
         font: {

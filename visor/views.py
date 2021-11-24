@@ -130,7 +130,9 @@ def webmap(request):
     h = 0
     m = 0
     l = 0
-    
+    distritos = ['Huanta', 'Ayahuanco', 'Huamanguilla', 'Iguain', 'Luricocha', 'Santillana', 'Sivia', 'Llochegua', 'Canayre', 'Uchuraccay', 'Pucacolpa' , 'Chaca']
+
+    distritos.sort()
     query = request.GET.get('search')
     dq = model.objects.all()
     nombre = ''
@@ -188,6 +190,7 @@ def webmap(request):
             pass
         if len(dq) >= 1:
             return render(request, r'dashboard/geoportal.html', {
+                'distritos': distritos,
                 'data': data,
                 'riesgo': data_riesgo['tabla'],
                 'densidad': data_densidad['tabla'],
@@ -263,6 +266,7 @@ def webmap(request):
 
     if len(dq) >= 1:
         return render(request, r'dashboard/geoportal.html', {
+            'distritos': distritos,
             'data': data,
             'riesgo': data_riesgo['tabla'],
             'densidad': data_densidad['tabla'],

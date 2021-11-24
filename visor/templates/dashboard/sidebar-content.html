@@ -1,13 +1,13 @@
 {% load humanize %}
 
 
-<div id="sidebar" class="leaflet-sidebar collapsed">
+<div id="sidebar" class="leaflet-sidebar collapsed h-50">
     <!-- Nav tabs -->
     <div class="leaflet-sidebar-tabs">
-        <ul role="tablist ">
+        <ul role="tablist " class="ms-0">
             <li>
                 <a href="#risk" role="tab" data-bs-toggle="tooltip" data-bs-placement="top" title="Indicadores COVID-19"
-                    onclick="styleRiesgo()"><i class="fas fa-virus"></i></a>
+                    onclick="styleRiesgo()" class=""><i class="fas fa-virus"></i></a>
             </li>
             <li>
                 <a href="#density" role="tab" data-bs-placement="top" title="Indicadores Densidad Poblacional"
@@ -28,17 +28,21 @@
                 <a href="#60" role="tab" data-bs-placement="top" title="Indicadores de 60 Años a mas"
                     onclick="style60()"><i class="fas fa-blind"></i></a>
             </li>
+            <li class="mt-4">
+                <a href="#help" role="tab" data-bs-placement="top" title="Indicadores de 60 Años a mas"
+                    onclick="style60()" class="text-primary"><i class="fas fa-question-circle"></i></a>
+            </li>
             <!-- <li class="">
                 <a href="#public" role="tab"><i class="fas fa-store"></i></a>
             </li> -->
         </ul>
 
-        {% comment %} <ul role="tablist">
+        <!-- <ul role="tablist">
             <li>
-                <a href="//github.com/nickpeihl/leaflet-sidebar-v2"><i class="fab fa-github-alt"
+                <a href="//github.com/nickpeihl/leaflet-sidebar-v2" class="mt-auto mb-0"><i class="fab fa-github-alt"
                         aria-hidden="true"></i></a>
             </li>
-        </ul> {% endcomment %}
+        </ul> -->
     </div>
 
     <!-- Tab panes -->
@@ -368,6 +372,7 @@
             </div>
 
         </div>
+        {% comment %} PANEL 60 {% endcomment %}
         <div class="leaflet-sidebar-pane" id="3059">
             <h1 class="leaflet-sidebar-header">
                 Distribución Población de 30 a 59 años
@@ -445,6 +450,128 @@
                     </div>
 
                 </div>
+
+            </div>
+
+        </div>
+        {% comment %} PANEL HELP {% endcomment %}
+        <div class="leaflet-sidebar-pane" id="help">
+            <h1 class="leaflet-sidebar-header">
+                Ayuda del Geoportal
+                <span class="leaflet-sidebar-close"><i class="fas fa-times"></i></i></span>
+            </h1>
+
+            <div class="container-fluid p-2">
+                <div class="d-flex">
+                    <div class="flex-row">
+                        
+                        <!-- <h4 class="fw-bolder">¿Qué información puedo encontrar?</h4> -->
+
+                        
+                    </div>
+                </div>
+
+                <div class="card shadow mt-1">
+                    <div class="card-body">
+                        <div class="accordion accordion-flush" id="accordionHelp">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="title-info">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#content-info" aria-expanded="false"
+                                        aria-controls="content-info">
+                                        Información General
+                                    </button>
+                                </h2>
+                                <div id="content-info" class="accordion-collapse collapse"
+                                    aria-labelledby="title-info" data-bs-parent="#accordionHelp">
+                                    <div class="accordion-body"><p>
+                                        El Geoportal de la Provincia de Huanta ofrece la información de sus 12 Distritos, generada en el <span class="fw-bolder">"Plan de
+                                        Prevención y Reducción del Riesgo Ante COVID-19"</span> correspondiente al período 2021- 2023
+                                    </p></div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="title-dist">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#content-dist" aria-expanded="false"
+                                        aria-controls="content-dist">
+                                        Distritos Evaluados
+                                    </button>
+                                </h2>
+                                <div id="content-dist" class="accordion-collapse collapse"
+                                    aria-labelledby="title-dist" data-bs-parent="#accordionHelp">
+                                    <div class="accordion-body">
+                                        <div class="list-group">
+                                            {% for d in distritos %}
+                                            <a href="/geoportal/?search={{d}}" class="list-group-item list-group-item-action {% if request.path == '/geoportal/?search={{e}}'%}active{%endif%}" aria-current="true">{{d}}</a>
+                                            {% endfor %}
+                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="title-themes">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#content-themes" aria-expanded="false"
+                                        aria-controls="content-themes">
+                                        Tematica de la Informacion
+                                    </button>
+                                </h2>
+                                <div id="content-themes" class="accordion-collapse collapse"
+                                    aria-labelledby="title-themes" data-bs-parent="#accordionHelp">
+                                    <div class="accordion-body"><ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><i class="fas fa-virus me-3"></i>Riesgo COVID-19</li>
+                                        <li class="list-group-item"><i class="fas fa-users me-3"></i>Densidad Poblacional
+                                        </li>
+                                        <li class="list-group-item"><i class="fas fa-hand-holding-water me-3"></i>Necesidades
+                                            Basicas Insatisfechas</li>
+                                        <li class="list-group-item"><i class="fas fa-biohazard me-3"></i>Zonas de Contagio
+                                        </li>
+                                        <li class="list-group-item"><i class="fas fa-walking me-3"></i>Distribucion Poblacion
+                                            de 30 a 59 anios</li>
+                                        <li class="list-group-item"><i class="fas fa-blind me-3"></i>Distribucion Poblacion
+                                            60 anios a mas</li>
+                                        <li class="list-group-item"><i class="fas fa-store me-3"></i>Areas de Influencia
+                                            Publica</li>
+                                        <li class="list-group-item"><i class="fas fa-map-marker-alt me-3"></i>Ubicacion</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="title-contact">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#content-contact" aria-expanded="false"
+                                        aria-controls="content-contact">
+                                        Contacto
+                                    </button>
+                                </h2>
+                                <div id="content-contact" class="accordion-collapse collapse"
+                                    aria-labelledby="title-contact" data-bs-parent="#accordionHelp">
+
+                                    <div class="accordion-body">
+                                        <p>
+                                            <h6>Soporte Tecnico:</h6>
+                                            <a href="mailto:franciscocontreras93@gmail.com"
+                                                class="text-decoration-none font-monospace">Francisco Contreras</a>
+                                            <hr>
+                                            <h6>Equipo Desarrollador:</h6>
+                                            <p>Francisco Contreras &middot; Rafael Vasquez</p>
+                                            <hr>
+                                            <p><i class="fa fa-copyright" aria-hidden="true"></i> GeoSIG 2021 &middot;
+                                                Todos los derechos Reservados</p>
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                
 
             </div>
 
