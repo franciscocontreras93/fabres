@@ -82,11 +82,20 @@ def getIndex(clases,dq,variable, colores=[]):
     
 
     for x in clases:
-        poblacion.append(SumCount(dq, variable, x, 'Sum'))
+        try:
+            poblacion.append(SumCount(dq, variable, x, 'Sum'))
+        except: 
+            poblacion.append(0)
     for x in clases:
-        manzanas.append(SumCount(dq, variable, x, 'Count'))
+        try:
+            manzanas.append(SumCount(dq, variable, x, 'Count'))
+        except: 
+            manzanas.append(0)
     for i in poblacion:
-        porcentaje.append(round((i*100/pobTotal(dq)), 1))
+        try:
+            porcentaje.append(round((i*100/pobTotal(dq)),1))
+        except: 
+            porcentaje.append(0)
 
     tabla = list(zip(clases, manzanas, poblacion, porcentaje, colores))
     
@@ -115,23 +124,6 @@ def index(request):
     })
 
 
-
-
-
-
-
-@login_required
-def getDistrito(request): 
-    query = request.GET.get('search')
-    dq = dq.filter(Q(distrito__icontains=query) | Q(nom_ccpp__icontains=query))
-
-    return render(request, 'dashboard/geoportal.html', {
-        'data': dq,
-    })
-
-
-
-
 @login_required
 def webmap(request):
     vh = 0
@@ -156,8 +148,9 @@ def webmap(request):
 
 
     if query != None:
-        dq = dq.filter(
-            Q(distrito__icontains=query) | Q(nom_ccpp__icontains=query))
+        dq = dq.filter(Q(distrito__icontains=query) |
+                       Q(nom_ccpp__icontains=query))
+        
         data = FS.PublicSerializer(dq)
         total = pobTotal(dq)
         vh = SumCount(dq, "n_riesgo", 'Muy Alto', 'Sum')
@@ -184,19 +177,15 @@ def webmap(request):
         d60_q3 = SumCount(dq, "q_pob60", 'Q3', 'Sum')
         d60_q4 = SumCount(dq, "q_pob60", 'Q4', 'Sum')
         d60_q5 = SumCount(dq, "q_pob60", 'Q5', 'Sum')
-
-        print(densidad_q1, densidad_q2, densidad_q3, densidad_q4, densidad_q5)
-
         nombre = query.capitalize()
         data_riesgo = getIndex(['Muy Alto', 'Alto', 'Medio', 'Bajo'], dq, 'n_riesgo', ["#dc3545c2", "#ff6a00c2", "#ffc107c2", "#198754c2", ])
-        data_densidad = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_densid', [
-                            '#fde725c2', '#5dc962c2', '#20908dc2', '#3a528bc2', '#440154c2'])
-        data_nbi = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_propnbi', [
-                            '#ffff24c2', '#f3d31bc2', '#e7a612c2', '#db7909c2', '#9f4f00c2'])
-        data_3059 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_30_a_59', [
-            '#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'])
-        data_60 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_pob60', [
-            '#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'])
+        data_densidad = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_densid', ['#fde725c2', '#5dc962c2', '#20908dc2', '#3a528bc2', '#440154c2'])
+        data_3059 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_30_a_59', ['#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'])
+        try:
+            data_60 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_pob60', ['#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'])
+            data_nbi = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_propnbi', ['#ffff24c2', '#f3d31bc2', '#e7a612c2', '#db7909c2', '#9f4f00c2'])
+        except:
+            pass
         if len(dq) >= 1:
             return render(request, r'dashboard/geoportal.html', {
                 'data': data,
@@ -240,8 +229,8 @@ def webmap(request):
             return render(request, r'shared/noexiste.html', {
 
             })
-        pass
-    
+            
+       
 
     vh = SumCount(dq, "n_riesgo", 'Muy Alto', 'Sum')
     h = SumCount(dq, "n_riesgo", 'Alto', 'Sum')

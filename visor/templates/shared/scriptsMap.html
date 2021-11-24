@@ -145,12 +145,14 @@
         <tbody>
             <tr>
                 <td scope="row">${feature.properties.idmanzana}</td>
-                <td class="fw-bolder">${feature.properties.distrito}</td>
+                <td class="fw-bolder"><a
+                        href="/geoportal/?search=${feature.properties.distrito}">${feature.properties.distrito}</a></td>
                 <td>${feature.properties.pob_total}</td>
                 <td rowspan="2" class="">${feature.properties.n_riesgo}</td>
             </tr>
             <tr>
-                <th scope="row" colspan="3"> Centro Poblado: ${feature.properties.nom_ccpp}</th>
+                <th scope="row" colspan="3"> Centro Poblado:${feature.properties.nom_ccpp}
+                        </th>
 
             </tr>
         <tbody>
@@ -161,8 +163,17 @@
             maxWidth: 1000,
 
         });
+        
     }
+    function pop_algo(feature,layer){
+         var popupContent = `ALGO`;
+         layer.bindPopup(popupContent, {
+         maxHeight: 1000,
+         maxWidth: 1000,
 
+         });
+
+    }
 
     // CREATE LAYERPANE
     map.createPane('dist_pane');
@@ -220,6 +231,7 @@
         };
         }
         })
+        layer.onEachFeature().bindPopup(pop_risk);
 
     }
     function styleDensidad(){
@@ -454,11 +466,18 @@
         })
     }
     function resetStyle(){
-         layer.setStyle({
+        layer.setStyle({
             color: '#d7191c',
             stroke: '',
             fillOpacity: '0.50'
         })
+
+        // layer.bindPopup(pop_algo(), {
+        // maxHeight: 1000,
+        // maxWidth: 1000,
+
+        // });
+        
     }
     
     map.fitBounds(layer.getBounds());

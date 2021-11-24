@@ -8,7 +8,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('users/', include('django.contrib.auth.urls')),
     path("geoportal/",views.webmap, name="webmap"),
-    path("geoportal/search/",views.getDistrito, name='filter'),    
+    # path("geoportal/search/",views.getDistrito, name='filter'),    
     path("geoportal/indicadores",views.distIndicadores, name="indicadores"),
     re_path(r'rest/fabres$', apiviews.re_distritos, name='api'), 
     re_path(r'rest/fabres/(?P<distrito>[a-zA-z]+)$', apiviews.re_distritos, name='distrito'),
