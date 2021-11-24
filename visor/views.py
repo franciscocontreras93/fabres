@@ -134,6 +134,11 @@ def getDistrito(request):
 
 @login_required
 def webmap(request):
+    vh = 0
+    h = 0
+    m = 0
+    l = 0
+    
     query = request.GET.get('search')
     dq = model.objects.all()
     nombre = ''
@@ -141,13 +146,12 @@ def webmap(request):
     data = FS.PublicSerializer(dq)
     data_riesgo = getIndex(['Muy Alto', 'Alto', 'Medio', 'Bajo'], dq, 'n_riesgo', ["#dc3545c2", "#ff6a00c2", "#ffc107c2", "#198754c2", ])
     data_densidad = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_densid', ['#fde725c2', '#5dc962c2', '#20908dc2', '#3a528bc2', '#440154c2'])
-    data_nbi = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_propnbi', ['#ffff24c2', '#f3d31b2', '#e7a612c2', '#db7909c2', '#9f4f00c2'])
+    data_nbi = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_propnbi', ['#ffff24c2', '#f3d31bc2', '#e7a612c2', '#db7909c2', '#9f4f00c2'])
     data_3059 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_30_a_59', [
         '#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'])
     data_60 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_pob60', [
         '#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'])
-
-
+    
 
 
 
@@ -200,9 +204,9 @@ def webmap(request):
                 'densidad': data_densidad['tabla'],
                 'nbi': data_nbi['tabla'],
                 'd3059': data_3059['tabla'],
-                'd60': data_60['tabla'],
                 'total_manzana': data_riesgo['total_manzanas'],
                 'total_porcentaje': data_riesgo['total_porcentaje'],
+                'd60': data_60['tabla'],
                 'vh': vh,
                 'h': h,
                 'm': m,
@@ -212,11 +216,11 @@ def webmap(request):
                 'densidad_q3': densidad_q3,
                 'densidad_q4': densidad_q4,
                 'densidad_q5': densidad_q5,
-                'nbi_q1' : nbi_q1,
-                'nbi_q2' : nbi_q2,
-                'nbi_q3' : nbi_q3,
-                'nbi_q4' : nbi_q4,
-                'nbi_q5' : nbi_q5,
+                'nbi_q1': nbi_q1,
+                'nbi_q2': nbi_q2,
+                'nbi_q3': nbi_q3,
+                'nbi_q4': nbi_q4,
+                'nbi_q5': nbi_q5,
                 'd3059_q1': d3059_q1,
                 'd3059_q2': d3059_q2,
                 'd3059_q3': d3059_q3,
@@ -228,6 +232,7 @@ def webmap(request):
                 'd60_q4':  d60_q4,
                 'd60_q5': d60_q5,
                 'total': total,
+
                 'nombre': nombre
             })
 
@@ -236,7 +241,7 @@ def webmap(request):
 
             })
         pass
-
+    
 
     vh = SumCount(dq, "n_riesgo", 'Muy Alto', 'Sum')
     h = SumCount(dq, "n_riesgo", 'Alto', 'Sum')
@@ -247,8 +252,25 @@ def webmap(request):
     densidad_q3 = SumCount(dq, "q_densid", 'Q3', 'Sum')
     densidad_q4 = SumCount(dq, "q_densid", 'Q4', 'Sum')
     densidad_q5 = SumCount(dq, "q_densid", 'Q5', 'Sum')
+    nbi_q1 = SumCount(dq, "q_propnbi", 'Q1', 'Sum')
+    nbi_q2 = SumCount(dq, "q_propnbi", 'Q2', 'Sum')
+    nbi_q3 = SumCount(dq, "q_propnbi", 'Q3', 'Sum')
+    nbi_q4 = SumCount(dq, "q_propnbi", 'Q4', 'Sum')
+    nbi_q5 = SumCount(dq, "q_propnbi", 'Q5', 'Sum')
+    d3059_q1 = SumCount(dq, "q_30_a_59", 'Q1', 'Sum')
+    d3059_q2 = SumCount(dq, "q_30_a_59", 'Q2', 'Sum')
+    d3059_q3 = SumCount(dq, "q_30_a_59", 'Q3', 'Sum')
+    d3059_q4 = SumCount(dq, "q_30_a_59", 'Q4', 'Sum')
+    d3059_q5 = SumCount(dq, "q_30_a_59", 'Q5', 'Sum')
+    d60_q1 = SumCount(dq, "q_pob60", 'Q1', 'Sum')
+    d60_q2 = SumCount(dq, "q_pob60", 'Q2', 'Sum')
+    d60_q3 = SumCount(dq, "q_pob60", 'Q3', 'Sum')
+    d60_q4 = SumCount(dq, "q_pob60", 'Q4', 'Sum')
+    d60_q5 = SumCount(dq, "q_pob60", 'Q5', 'Sum')
    
     total = pobTotal(dq)   
+
+    
 
     if len(dq) >= 1:
         return render(request, r'dashboard/geoportal.html', {
@@ -259,7 +281,7 @@ def webmap(request):
             'd3059': data_3059['tabla'],
             'total_manzana': data_riesgo['total_manzanas'],
             'total_porcentaje': data_riesgo['total_porcentaje'],
-
+            'd60': data_60['tabla'],
             'vh': vh,
             'h': h,
             'm': m,
@@ -269,6 +291,21 @@ def webmap(request):
             'densidad_q3': densidad_q3,
             'densidad_q4': densidad_q4,
             'densidad_q5': densidad_q5,
+            'nbi_q1': nbi_q1,
+            'nbi_q2': nbi_q2,
+            'nbi_q3': nbi_q3,
+            'nbi_q4': nbi_q4,
+            'nbi_q5': nbi_q5,
+            'd3059_q1': d3059_q1,
+            'd3059_q2': d3059_q2,
+            'd3059_q3': d3059_q3,
+            'd3059_q4': d3059_q4,
+            'd3059_q5': d3059_q5,
+            'd60_q1': d60_q1,
+            'd60_q2': d60_q2,
+            'd60_q3': d60_q3,
+            'd60_q4':  d60_q4,
+            'd60_q5': d60_q5,
             'total': total,
 
             'nombre': nombre
