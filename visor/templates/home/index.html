@@ -1,107 +1,375 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block content %}
-  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-            <div class="container px-5">
-                <a class="navbar-brand" href="#page-top">GRD-FABRES (EN DESARROLLO) </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-2">
-                        {% comment %} <li class="nav-item"><a class="nav-link" href="#!">Sign Up</a></li> {% endcomment %}
-                        <li class="nav-item"><a class="nav-link" href="/geoportal">Geoportal</a></li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-                        {% comment %} <li class="nav-item"><a class="nav-link" href="#!">Sign Up</a></li> {% endcomment %}
-                        <li class="nav-item"><a class="nav-link" href="#!">Log In</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Header-->
-        <header class="masthead text-center text-white">
-            <div class="masthead-content">
-                <div class="container px-5">
-                    <h1 class="masthead-heading mb-0">Portal en Desarrollo</h1>
-                    <h2 class="masthead-subheading mb-0"></h2>
-                    {% comment %} <a class="btn btn-dark btn-xl rounded-pill mt-5" href="#scroll">Learn More</a>
-                </div> {% endcomment %}
-            </div>
-            {% comment %} <div class="bg-circle-1 bg-circle"></div>
-            <div class="bg-circle-2 bg-circle"></div>
-            <div class="bg-circle-3 bg-circle"></div>
-            <div class="bg-circle-4 bg-circle"></div>  {% endcomment %}
-        </header>
-        <!-- Content section 1-->
-        <section id="distritos">
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'assets/img/distritos.png'%}" alt="..." /></div>
-                    </div>
-                    <div class="col-lg-6 order-lg-1">
-                        <div class="p-5">
-                            <h2 class="display-4">REST-API Distritos</h2>
-                            <p>Con nuestra api rest de distritos, puede acceder a la informacion relativa a todos los distritos en estudio. Permitiendo la visualizacion y seguimiento en tiempo real de la data generada en el desarrollo del proyecto FABRES.
-                            
-                            <a class="nav-link" href="/rest/fabres" style="color: orange;">fabres2.herokuapp.com/rest/fabres</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Content section 2-->
-         <section>
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'assets/img/detalle.png'%}" alt="..." /></div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                            <h2 class="display-4">REST-API Detalle</h2>
-                            <p>Con nuestra api rest de detalle, puede acceder a la informacion  detallada en estudio pudiendo ser filtrada por Distrito, Centro Poblado o Identificador de Manzana. Permitiendo la visualizacion y seguimiento en tiempo real de la data generada en el desarrollo del proyecto FABRES</p>
-                            <a class="nav-link" href="/rest/fabres/chaca"
-                                style="color: orange;">fabres2.herokuapp.com/rest/fabres/*NOMBRE DISTRITO*</a>
-                            <a class="nav-link" href="/rest/fabres/santa rosa"
-                                style="color: orange;">fabres2.herokuapp.com/rest/fabres/*NOMBRE CENTRO POBLADO*</a>
-                                <a class="nav-link" href="/rest/fabres/05040400100002A"
-                                    style="color: orange;">fabres2.herokuapp.com/rest/fabres/*ID MANZANA*</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> 
-        <!-- Content section 3-->
-         <section>
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center">
-                    <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle"
-                                src="https://th.bing.com/th/id/R.533b93edf1d19c4925fadb1df4aadb01?rik=DDduOEqRinzw9A&pid=ImgRaw&r=0"
-                                alt="..." /></div>
-                    </div>
-                    <div class="col-lg-6 order-lg-1">
-                        <div class="p-5">
-                            <h2 class="display-4">REST-API Geoprocesamiento</h2>
-                            <p>Con nuestra api rest de geoprocesamiento, podras llevar el poder de los Sistemas de Informacion Geografica a cualquier navegador web. Incorporamos una serie de geoprocesos para que puedan realizar cualquier analisis espacial, sin salir del servicio web.<br>
-                            Nuestra REST-API Buffer, permite localizar cualquier geometria en un radio determinado por la consulta espacial ingresada por el usuario. (EN DESARROLLO)
-                            <a class="nav-link" href="/rest/processing/buffer/100"
-                                style="color: orange;">fabres2.herokuapp.com/rest/processing/*TAMAÑO DEL BUFFER EN METROS*</a>
-                            
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> 
-        <!-- Footer-->
-        <footer class="py-5 bg-black">
-            <div class="container px-5">
-                <p class="m-0 text-center text-white small">Copyright &copy; <a
-                        href="https://www.linkedin.com/in/geofrancisco/" class="">Francisco Contreras</a>
-                    <a href="www.linkedin.com/in/rafael-vásquez-5a455236" class="">Rafael Vasquez</a></p>
-            </div>
-        </footer>
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-{% endblock content %}
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Massive - Multipurpose HTML Template.</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- Web Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/LineIcons.2.0.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/tiny-slider.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/glightbox.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- /End Preloader -->
+    {% comment %} navbar {% endcomment %}
+    {% include 'shared/components/navbar.html' %}
+    {% comment %} hero  {% endcomment %}
+    {% include 'shared/components/hero.html' %}
+
+    {% comment %} services  {% endcomment %}
+    {% include 'shared/components/services.html' %}
+
+    {% comment %} about  {% endcomment %}
+    {% include 'shared/components/about.html' %}
+
+    
+
+    
+
+    {% comment %} <!-- Start Intro Video Area -->
+    <section class="intro-video-area overlay section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title white-text">
+                        <span class="wow fadeInDown" data-wow-delay=".2s">Create your own experience</span>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Ready to grow faster?</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem
+                            Ipsum available, but the majority have suffered alteration in some form.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-video-play">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10 col-12">
+                                <div class="play-thumb wow zoomIn" data-wow-delay=".2s">
+                                    <a href="https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM"
+                                        class="glightbox video"><i class="lni lni-play"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- row -->
+        </div>
+    </section>
+    <!-- End Intro Video Area --> {% endcomment %}
+
+    {% comment %} <!-- Start Pricing Table Area -->
+    <section class="pricing-table section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <span class="wow fadeInDown" data-wow-delay=".2s">Pricing Table</span>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Our Pricing Plan</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem
+                            Ipsum available, but the majority have suffered alteration in some form.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Single Table -->
+                    <div class="single-table wow fadeInUp" data-wow-delay=".2s">
+                        <!-- Table Head -->
+                        <div class="table-head">
+                            <h4 class="title">Single use</h4>
+                            <div class="price">
+                                <p class="amount">$10<span class="duration">per month</span></p>
+                            </div>
+                        </div>
+                        <!-- End Table Head -->
+                        <!-- Table List -->
+                        <ul class="table-list">
+                            <li>Up to 5 users</li>
+                            <li>Basic support on Github</li>
+                            <li>Monthly updates</li>
+                            <li>Free cancelation</li>
+                        </ul>
+                        <!-- End Table List -->
+                        <!-- Table Bottom -->
+                        <div class="button">
+                            <a class="btn" href="#">Start free trial</a>
+                        </div>
+                        <!-- End Table Bottom -->
+                    </div>
+                    <!-- End Single Table-->
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Single Table -->
+                    <div class="single-table wow fadeInUp" data-wow-delay=".4s">
+                        <!-- Table Head -->
+                        <div class="table-head">
+                            <h4 class="title">Multiple use</h4>
+                            <div class="price">
+                                <p class="amount">$20<span class="duration">per month</span></p>
+                            </div>
+                        </div>
+                        <!-- End Table Head -->
+                        <!-- Table List -->
+                        <ul class="table-list">
+                            <li>Up to 10 users</li>
+                            <li>Basic support on Github</li>
+                            <li>Monthly updates</li>
+                            <li>Free cancelation</li>
+                        </ul>
+                        <!-- End Table List -->
+                        <!-- Table Bottom -->
+                        <div class="button">
+                            <a class="btn" href="#">Start free trial</a>
+                        </div>
+                        <!-- End Table Bottom -->
+                    </div>
+                    <!-- End Single Table-->
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Single Table -->
+                    <div class="single-table wow fadeInUp" data-wow-delay=".6s">
+                        <!-- Table Head -->
+                        <div class="table-head">
+                            <h4 class="title">Extended use</h4>
+                            <div class="price">
+                                <p class="amount">$30<span class="duration">per month</span></p>
+                            </div>
+                        </div>
+                        <!-- End Table Head -->
+                        <!-- Table List -->
+                        <ul class="table-list">
+                            <li>Up to 20 users</li>
+                            <li>Basic support on Github</li>
+                            <li>Monthly updates</li>
+                            <li>Free cancelation</li>
+                        </ul>
+                        <!-- End Table List -->
+                        <!-- Table Bottom -->
+                        <div class="button">
+                            <a class="btn" href="#">Start free trial</a>
+                        </div>
+                        <!-- End Table Bottom -->
+                    </div>
+                    <!-- End Single Table-->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/ End Pricing Table Area --> {% endcomment %}
+
+    {% comment %} banner  {% endcomment %}
+    {% include 'shared/components/banner.html' %}
+
+
+    {% comment %} <!-- Start Latest News Area -->
+    <div class="latest-news-area section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <span class="wow fadeInDown" data-wow-delay=".2s">latest news</span>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Latest News & Blog</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">There are many variations of passages of Lorem
+                            Ipsum available, but the majority have suffered alteration in some form.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Single News -->
+                    <div class="single-news wow fadeInUp" data-wow-delay=".2s">
+                        <div class="image">
+                            <img class="thumb" src="assets/images/blog/blog-grid1.jpg" alt="#">
+                            <div class="meta-details">
+                                <img src="assets/images/blog/author.jpg" alt="#"> <span>BY TIM NORTON</span>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <h4 class="title"><a href="blog-single-sidebar.html">Make your team a Design driven
+                                    company</a></h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been the industry's standard.</p>
+                        </div>
+                    </div>
+                    <!-- End Single News -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Single News -->
+                    <div class="single-news wow fadeInUp" data-wow-delay=".4s">
+                        <div class="image">
+                            <img class="thumb" src="assets/images/blog/blog-grid2.jpg" alt="#">
+                            <div class="meta-details">
+                                <img src="assets/images/blog/author.jpg" alt="#"> <span>BY TIM NORTON</span>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <h4 class="title"><a href="blog-single-sidebar.html">The newest web framework that changed
+                                    the world</a></h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been the industry's standard.</p>
+                        </div>
+                    </div>
+                    <!-- End Single News -->
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <!-- Single News -->
+                    <div class="single-news wow fadeInUp" data-wow-delay=".6s">
+                        <div class="image">
+                            <img class="thumb" src="assets/images/blog/blog-grid3.jpg" alt="#">
+                            <div class="meta-details">
+                                <img src="assets/images/blog/author.jpg" alt="#"> <span>BY TIM NORTON</span>
+                            </div>
+                        </div>
+                        <div class="content-body">
+                            <h4 class="title"><a href="blog-single-sidebar.html">5 ways to improve user retention for
+                                    your startup</a></h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been the industry's standard.</p>
+                        </div>
+                    </div>
+                    <!-- End Single News -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Latest News Area --> {% endcomment %}
+
+    {% comment %} <!-- Start Newsletter Area -->
+    <section class="newsletter-area section">
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-8 col-12">
+                    <!-- Start Newsletter Form -->
+                    <div class="subscribe-text wow fadeInLeft" data-wow-delay=".2s">
+                        <h6>Sign up for Newsletter</h6>
+                        <p class="">Sign Up and start using a free account <br> to see what it's all about.</p>
+                        <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+                            <input name="EMAIL" placeholder="Your email address" class="common-input"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your email address'"
+                                required="" type="email">
+                            <div class="button">
+                                <button class="btn">Subscribe Now!</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- End Newsletter Form -->
+                </div>
+                <div class="col-lg-4 col-12">
+                    <div class="mini-call-action wow fadeInRight" data-wow-delay=".4s">
+                        <h4>Do you want to grow your online business with Massive?</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <div class="button">
+                            <a href="#" class="btn">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /End Newsletter Area --> {% endcomment %}
+
+    {% comment %} <!-- Start Brand Area -->
+    <div class="brand-area section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-12">
+                    <div class="section-title align-left wow fadeInLeft" data-wow-delay=".2s">
+                        <span>Our Awesome Clients</span>
+                        <h2>We built Best solutions for your company</h2>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have
+                            suffered alteration in some form.</p>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-12">
+                    <div class="brand-logo-wrapper wow fadeInRight" data-wow-delay=".4s">
+                        <ul class="brand-list liststyle d-flex flex-wrap justify-content-center">
+                            <li><a href="#">
+                                    <img src="assets/images/clients/client1.png" alt="Brand Logo Images">
+                                </a></li>
+                            <li><a href="#">
+                                    <img src="assets/images/clients/client2.png" alt="Brand Logo Images">
+                                </a></li>
+                            <li><a href="#">
+                                    <img src="assets/images/clients/client3.png" alt="Brand Logo Images">
+                                </a></li>
+                            <li><a href="#">
+                                    <img src="assets/images/clients/client4.png" alt="Brand Logo Images">
+                                </a></li>
+                            <li><a href="#">
+                                    <img src="assets/images/clients/client5.png" alt="Brand Logo Images">
+                                </a></li>
+                            <li><a href="#">
+                                    <img src="assets/images/clients/client6.png" alt="Brand Logo Images">
+                                </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Brand Area --> {% endcomment %}
+
+    
+    {% comment %} footer  {% endcomment %}
+    {% include 'shared/components/footer.html' %}
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top btn-hover">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <!-- ========================= JS here ========================= -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'assets/js/count-up.min.js'%}"></script>
+    <script src="{% static 'assets/js/wow.min.js'%}"></script>
+    <script src="{% static 'assets/js/tiny-slider.js'%}"></script>
+    <script src="{% static 'assets/js/glightbox.min.js'%}"></script>
+    <script src="{% static 'assets/js/imagesloaded.min.js'%}"></script>
+    <script src="{% static 'assets/js/isotope.min.js'%}"></script>
+    <script src="{% static 'assets/js/main.js'%}"></script>
+    <script type="text/javascript">
+        //========= glightbox
+        GLightbox({
+            'href': 'https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM',
+            'type': 'video',
+            'source': 'youtube', //vimeo, youtube or local
+            'width': 900,
+            'autoplayVideos': true,
+        });
+    </script>
+</body>
+
+</html>
