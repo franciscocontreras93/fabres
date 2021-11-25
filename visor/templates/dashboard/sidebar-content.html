@@ -10,7 +10,7 @@
                     onclick="styleRiesgo()" class=""><i class="fas fa-virus"></i></a>
             </li>
             <li>
-                <a href="#density" role="tab" data-bs-placement="top" title="Indicadores Densidad Poblacional"
+                <a href="#density" role="tab" data-bs-placement="top" title="Indicadores Densidad Poblaciónal"
                     onclick="styleDensidad()"><i class="fas fa-users" "></i></a>
             </li>
             <li class="">
@@ -79,7 +79,7 @@
                                 <tr>
                                     <th>Riesgo</th>
                                     <th>Manzanas</th>
-                                    <th>Poblacion</th>
+                                    <th>Población</th>
                                     <th>%</th>
                                 </tr>
                             </thead>
@@ -87,7 +87,12 @@
 
                                 {% for e in riesgo %}
                                 <tr>
+                                    {% if nombre %}
+                                    <td style="background-color: {{e.4}}" class="fw-bolder">{{e.5|slice:"1:"}}</td>                                    
+                                    {% else %}
                                     <td style="background-color: {{e.4}}" class="fw-bolder">{{e.0}}</td>
+                                    {% endif %}
+                                    
                                     <td>{{e.1}}</td>
                                     <td>{{e.2 | intcomma}}</td>
                                     <td>{{e.3}} %</td>
@@ -107,7 +112,7 @@
                 </div>
                 <div class="card shadow mt-1">
                     <div class="card-header">
-                        <i class="fas fa-chart-bar me-2"> </i>Poblacion en Riesgo | {{nombre}}
+                        <i class="fas fa-chart-bar me-2"> </i>Población en Riesgo | {{nombre}}
                     </div>
                     <div class="card-body">
                         <div class="card-body"><canvas id="BarChart" width="100%" height="40"></canvas></div>
@@ -116,7 +121,7 @@
                 <div class="card shadow mt-1">
                     <div class="card-header">
                         <i class="fas fa-chart-pie"></i>
-                        Porcentaje de Poblacion en Riesgo | {{nombre}}
+                        Porcentaje de Población en Riesgo | {{nombre}}
                     </div>
                     <div class="card-body"><canvas id="PieChart" width="100%" height="40"></canvas></div>
 
@@ -126,10 +131,10 @@
             </div>
 
         </div>
-        {% comment %} PANEL DENSIDAD POBLACIONAL {% endcomment %}
+        {% comment %} PANEL DENSIDAD POBLACIóNAL {% endcomment %}
         <div class="leaflet-sidebar-pane" id="density">
             <h1 class="leaflet-sidebar-header">
-                Densidad Poblacional
+                Densidad Poblaciónal
                 <span class="leaflet-sidebar-close"><i class="fas fa-times"></i></i></span>
             </h1>
 
@@ -148,15 +153,15 @@
 
                 <div class="card shadow mt-1">
                     <div class="card-header">
-                        Indicadores de Densidad Poblacional | {{nombre}}
+                        Indicadores de Densidad Poblaciónal | {{nombre}}
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple" class="table">
                             <thead>
                                 <tr>
-                                    <th>Simbolo</th>
+                                    <th>Símbolo</th>
                                     <th>Manzanas</th>
-                                    <th>Poblacion</th>
+                                    <th>Población</th>
                                     <th>%</th>
                                 </tr>
                             </thead>
@@ -164,7 +169,11 @@
 
                                 {% for e in densidad %}
                                 <tr>
+                                    {% if nombre %}
+                                    <td style="background-color: {{e.4}}" class="fw-bolder">{{e.5}}</td>
+                                    {% else %}
                                     <td style="background-color: {{e.4}}" class="fw-bolder">{{e.0}}</td>
+                                    {% endif %}
                                     <td>{{e.1}}</td>
                                     <td>{{e.2 | intcomma}}</td>
                                     <td>{{e.3}} %</td>
@@ -187,7 +196,8 @@
                 <div class="container-fluid p-2">
                     <div class="card shadow mt-3">
                         <div class="card-header">
-                            <i class="fas fa-chart-bar me-2"> </i>Indicadores
+                            <i class="fas fa-chart-bar me-2"> </i>
+                             Población Densidad Poblaciónal | {{nombre}}
                         </div>
                         <div class="card-body">
                             <div class="card-body"><canvas id="BarChartDensidad" width="100%" height="40"></canvas>
@@ -197,7 +207,7 @@
                     <div class="card mb-4 shadow mt-3">
                         <div class="card-header">
                             <i class="fas fa-chart-pie"></i>
-                            Porcentaje en Riesgo
+                            Porcentaje en Densidad Poblaciónal | {{nombre}}
                         </div>
                         <div class="card-body"><canvas id="PieChartDensidad" width="100%" height="40"></canvas></div>
 
@@ -236,9 +246,9 @@
                         <table id="datatablesSimple" class="table">
                             <thead>
                                 <tr>
-                                    <th>Simbolo</th>
+                                    <th>Símbolo</th>
                                     <th>Manzanas</th>
-                                    <th>Poblacion</th>
+                                    <th>Población</th>
                                     <th>%</th>
                                 </tr>
                             </thead>
@@ -246,7 +256,11 @@
 
                                 {% for e in nbi %}
                                 <tr>
+                                    {% if nombre %}
+                                    <td style="background-color: {{e.4}}" class="fw-bolder">{{e.5}}</td>
+                                    {% else %}
                                     <td style="background-color: {{e.4}}" class="fw-bolder">{{e.0}}</td>
+                                    {% endif %}
                                     <td>{{e.1}}</td>
                                     <td>{{e.2 | intcomma}}</td>
                                     <td>{{e.3}} %</td>
@@ -269,7 +283,8 @@
                 <div class="container-fluid p-2">
                     <div class="card shadow mt-3">
                         <div class="card-header">
-                            <i class="fas fa-chart-bar me-2"> </i>Indicadores
+                            <i class="fas fa-chart-bar me-2"> </i>
+                            Población NBI {{nombre}}
                         </div>
                         <div class="card-body">
                             <div class="card-body"><canvas id="BarChartNbi" width="100%" height="40"></canvas>
@@ -279,7 +294,7 @@
                     <div class="card mb-4 shadow mt-3">
                         <div class="card-header">
                             <i class="fas fa-chart-pie"></i>
-                            Porcentaje en Riesgo
+                            Porcentaje Población NBI {{nombre}}
                         </div>
                         <div class="card-body"><canvas id="PieChartNbi" width="100%" height="40"></canvas></div>
 
@@ -318,9 +333,9 @@
                         <table id="datatablesSimple" class="table">
                             <thead>
                                 <tr>
-                                    <th>Simbolo</th>
+                                    <th>Símbolo</th>
                                     <th>Manzanas</th>
-                                    <th>Poblacion</th>
+                                    <th>Población</th>
                                     <th>%</th>
                                 </tr>
                             </thead>
@@ -328,7 +343,11 @@
 
                                 {% for e in d60 %}
                                 <tr>
+                                    {% if nombre %}
+                                    <td style="background-color: {{e.4}}" class="fw-bolder">{{e.5}}</td>
+                                    {% else %}
                                     <td style="background-color: {{e.4}}" class="fw-bolder">{{e.0}}</td>
+                                    {% endif %}
                                     <td>{{e.1}}</td>
                                     <td>{{e.2 | intcomma}}</td>
                                     <td>{{e.3}} %</td>
@@ -351,7 +370,8 @@
                 <div class="container-fluid p-2">
                     <div class="card shadow mt-3">
                         <div class="card-header">
-                            <i class="fas fa-chart-bar me-2"> </i>Indicadores
+                            <i class="fas fa-chart-bar me-2"> </i>
+                            Población de 60 años a mas |{{nombre}}
                         </div>
                         <div class="card-body">
                             <div class="card-body"><canvas id="BarChart60" width="100%" height="40"></canvas>
@@ -361,7 +381,7 @@
                     <div class="card mb-4 shadow mt-3">
                         <div class="card-header">
                             <i class="fas fa-chart-pie"></i>
-                            Porcentaje en Riesgo
+                            Porcentaje en Población de 60 años a mas | {{nombre}}
                         </div>
                         <div class="card-body"><canvas id="PieChart60" width="100%" height="40"></canvas></div>
 
@@ -400,9 +420,9 @@
                         <table id="datatablesSimple" class="table">
                             <thead>
                                 <tr>
-                                    <th>Simbolo</th>
+                                    <th>Símbolo</th>
                                     <th>Manzanas</th>
-                                    <th>Poblacion</th>
+                                    <th>Población</th>
                                     <th>%</th>
                                 </tr>
                             </thead>
@@ -410,7 +430,11 @@
 
                                 {% for e in d3059 %}
                                 <tr>
+                                    {% if nombre %}
+                                    <td style="background-color: {{e.4}}" class="fw-bolder">{{e.5}}</td>
+                                    {% else %}
                                     <td style="background-color: {{e.4}}" class="fw-bolder">{{e.0}}</td>
+                                    {% endif %}
                                     <td>{{e.1}}</td>
                                     <td>{{e.2 | intcomma}}</td>
                                     <td>{{e.3}} %</td>
@@ -433,7 +457,8 @@
                 <div class="container-fluid p-2">
                     <div class="card shadow mt-3">
                         <div class="card-header">
-                            <i class="fas fa-chart-bar me-2"> </i>Indicadores
+                            <i class="fas fa-chart-bar me-2"> </i>
+                            Población de 30 a 59 años | {{nombre}}
                         </div>
                         <div class="card-body">
                             <div class="card-body"><canvas id="BarChart3059" width="100%" height="40"></canvas>
@@ -443,7 +468,7 @@
                     <div class="card mb-4 shadow mt-3">
                         <div class="card-header">
                             <i class="fas fa-chart-pie"></i>
-                            Porcentaje en Riesgo
+                            Porcentaje Población de 30 a 59 años | {{nombre}}
                         </div>
                         <div class="card-body"><canvas id="PieChart3059" width="100%" height="40"></canvas></div>
 
@@ -515,26 +540,26 @@
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#content-themes" aria-expanded="false"
                                         aria-controls="content-themes">
-                                        Tematica de la Informacion
+                                        Tematica de la Información
                                     </button>
                                 </h2>
                                 <div id="content-themes" class="accordion-collapse collapse"
                                     aria-labelledby="title-themes" data-bs-parent="#accordionHelp">
                                     <div class="accordion-body"><ul class="list-group list-group-flush">
                                         <li class="list-group-item"><i class="fas fa-virus me-3"></i>Riesgo COVID-19</li>
-                                        <li class="list-group-item"><i class="fas fa-users me-3"></i>Densidad Poblacional
+                                        <li class="list-group-item"><i class="fas fa-users me-3"></i>Densidad Poblaciónal
                                         </li>
                                         <li class="list-group-item"><i class="fas fa-hand-holding-water me-3"></i>Necesidades
-                                            Basicas Insatisfechas</li>
+                                            Básicas Insatisfechas</li>
                                         <li class="list-group-item"><i class="fas fa-biohazard me-3"></i>Zonas de Contagio
                                         </li>
-                                        <li class="list-group-item"><i class="fas fa-walking me-3"></i>Distribucion Poblacion
+                                        <li class="list-group-item"><i class="fas fa-walking me-3"></i>Distribución Población
                                             de 30 a 59 anios</li>
-                                        <li class="list-group-item"><i class="fas fa-blind me-3"></i>Distribucion Poblacion
+                                        <li class="list-group-item"><i class="fas fa-blind me-3"></i>Distribución Población
                                             60 anios a mas</li>
-                                        <li class="list-group-item"><i class="fas fa-store me-3"></i>Areas de Influencia
-                                            Publica</li>
-                                        <li class="list-group-item"><i class="fas fa-map-marker-alt me-3"></i>Ubicacion</li>
+                                        <li class="list-group-item"><i class="fas fa-store me-3"></i>Áreas de Influencia
+                                            Pública</li>
+                                        <li class="list-group-item"><i class="fas fa-map-marker-alt me-3"></i>Ubicación</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -552,12 +577,12 @@
 
                                     <div class="accordion-body">
                                         <p>
-                                            <h6>Soporte Tecnico:</h6>
+                                            <h6>Soporte Técnico:</h6>
                                             <a href="mailto:franciscocontreras93@gmail.com"
                                                 class="text-decoration-none font-monospace">Francisco Contreras</a>
                                             <hr>
                                             <h6>Equipo Desarrollador:</h6>
-                                            <p>Francisco Contreras &middot; Rafael Vasquez</p>
+                                            <p>Francisco Contreras &middot; Rafael Vásquez</p>
                                             <hr>
                                             <p><i class="fa fa-copyright" aria-hidden="true"></i> GeoSIG 2021 &middot;
                                                 Todos los derechos Reservados</p>

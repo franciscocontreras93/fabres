@@ -70,17 +70,20 @@ def pobTotal(dq):
     return op
 
 
-def getIndex(clases,dq,variable, colores=[]):
+def getIndex(clases,dq,variable, lgnd, colores=[]):
     
     clases = clases
     poblacion = []
     porcentaje = []
     manzanas = []
     colores = colores
+    values = []
     
 
     
 
+    for d in dq:
+        values.append(getattr(d, lgnd))
     for x in clases:
         try:
             poblacion.append(SumCount(dq, variable, x, 'Sum'))
@@ -96,8 +99,12 @@ def getIndex(clases,dq,variable, colores=[]):
             porcentaje.append(round((i*100/pobTotal(dq)),1))
         except: 
             porcentaje.append(0)
+    
+    leyenda = list(set(values))
+    leyenda.sort()
+    print(leyenda)
 
-    tabla = list(zip(clases, manzanas, poblacion, porcentaje, colores))
+    tabla = list(zip(clases, manzanas, poblacion, porcentaje, colores,leyenda))
     
 
     mapIndex = {
@@ -138,12 +145,12 @@ def webmap(request):
     nombre = ''
     total = pobTotal(dq)
     data = FS.PublicSerializer(dq)
-    data_riesgo = getIndex(['Muy Alto', 'Alto', 'Medio', 'Bajo'], dq, 'n_riesgo', ["#dc3545c2", "#ff6a00c2", "#ffc107c2", "#198754c2", ])
-    data_densidad = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_densid', ['#fde725c2', '#5dc962c2', '#20908dc2', '#3a528bc2', '#440154c2'])
-    data_nbi = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_propnbi', ['#ffff24c2', '#f3d31bc2', '#e7a612c2', '#db7909c2', '#9f4f00c2'])
-    data_3059 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_30_a_59', [
+    data_riesgo = getIndex(['Muy Alto', 'Alto', 'Medio', 'Bajo'], dq, 'n_riesgo', 'lgn_r',["#dc3545c2", "#ff6a00c2", "#ffc107c2", "#198754c2", ])
+    data_densidad = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_densid','lgn_d',['#fde725c2', '#5dc962c2', '#20908dc2', '#3a528bc2', '#440154c2'])
+    data_nbi = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_propnbi','lgn_nbi', ['#ffff24c2', '#f3d31bc2', '#e7a612c2', '#db7909c2', '#9f4f00c2'])
+    data_3059 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_30_a_59', 'lgn_3059',[
         '#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'])
-    data_60 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_pob60', [
+    data_60 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_pob60', 'lgn_60',[
         '#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'])
     
 
@@ -180,14 +187,13 @@ def webmap(request):
         d60_q4 = SumCount(dq, "q_pob60", 'Q4', 'Sum')
         d60_q5 = SumCount(dq, "q_pob60", 'Q5', 'Sum')
         nombre = query.capitalize()
-        data_riesgo = getIndex(['Muy Alto', 'Alto', 'Medio', 'Bajo'], dq, 'n_riesgo', ["#dc3545c2", "#ff6a00c2", "#ffc107c2", "#198754c2", ])
-        data_densidad = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_densid', ['#fde725c2', '#5dc962c2', '#20908dc2', '#3a528bc2', '#440154c2'])
-        data_3059 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_30_a_59', ['#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'])
-        try:
-            data_60 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_pob60', ['#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'])
-            data_nbi = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_propnbi', ['#ffff24c2', '#f3d31bc2', '#e7a612c2', '#db7909c2', '#9f4f00c2'])
-        except:
-            pass
+        data_riesgo = getIndex(['Muy Alto', 'Alto', 'Medio', 'Bajo'], dq, 'n_riesgo', 'lgn_r',
+                                ["#dc3545c2", "#ff6a00c2", "#ffc107c2", "#198754c2", ])
+        data_densidad = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_densid', 'lgn_d',['#fde725c2', '#5dc962c2', '#20908dc2', '#3a528bc2', '#440154c2'])
+        data_3059 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_30_a_59', 'lgn_3059',['#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'])
+        data_nbi = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_propnbi', 'lgn_nbi',['#ffff24c2', '#f3d31bc2', '#e7a612c2', '#db7909c2', '#9f4f00c2'])
+        data_60 = getIndex(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], dq, 'q_pob60', 'lgn_60',['#1a9641c2', '#abdd00c2', '#ffff00c2', '#fd7a00c2', '#d7191cc2'])
+
         if len(dq) >= 1:
             return render(request, r'dashboard/geoportal.html', {
                 'distritos': distritos,
