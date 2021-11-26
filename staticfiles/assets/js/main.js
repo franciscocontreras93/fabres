@@ -107,13 +107,13 @@ Author: GrayGrids
 
 const typed = new Typed('.typed', {
     strings: [
-        '<i class="word-change h1">Geología</i>',
-        '<i class="word-change h1">Geotecnia</i>',
-        '<i class="word-change h1">Geomarketing</i>',
-        '<i class="word-change h1">Catastro</i>',
-        '<i class="word-change h1">Gestión Ambiental</i>',
-        '<i class="word-change h1">Sensores Remotos</i>',
-        '<i class="word-change h1">WebMapping</i>',
+        '<span class="word-change h1">Geología</span>',
+        '<span class="word-change h1">Geotecnia</span>',
+        '<span class="word-change h1">Geomarketing</span>',
+        '<span class="word-change h1">Gestión Ambiental</span>',
+        // '<span class="word-change h1">Sensores Remotos</span>',
+        // '<span class="word-change h1">Catastro</span>',
+        // '<span class="word-change h1">WebMapping</span>',
         // '<i class="word-change">Sistemas de <br>Información <br>Geográfica</i>',
     ],
 
@@ -124,9 +124,9 @@ const typed = new Typed('.typed', {
     //smartBackspace: true, // Eliminar solamente las palabras que sean nuevas en una cadena de texto.
     shuffle: false, // Alterar el orden en el que escribe las palabras.
     backDelay: 1000, // Tiempo de espera despues de que termina de escribir una palabra.
-    loop: true, // Repetir el array de strings
+    loop: false, // Repetir el array de strings
     loopCount: false, // Cantidad de veces a repetir el array.  false = infinite
     showCursor: true, // Mostrar cursor palpitanto
-    cursorChar: '|', // Caracter para el cursor
+    // cursorChar: '|', // Caracter para el cursor
     contentType: 'html', // 'html' o 'null' para texto sin formato
 });

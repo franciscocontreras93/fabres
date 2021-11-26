@@ -132,9 +132,9 @@
     // map.addLayer(OpenStreetMap_Mapnik)
     // POPUPS
     function pop_risk(feature, layer) {
-        var popupContent = `<table class="table-sm table-dark table-bordered border-white">
-        <thead>
-            <tr>
+        var popupContent = `<table class="table table-sm table-light table-bordered border-dark">
+        <thead class="table-dark">
+            <tr >
                 <th scope="col"> Manzana</th>
                 <th scope="col">Distrito</th>
                 <th scope="col">Poblacion</th>
@@ -145,16 +145,15 @@
         <tbody>
             <tr>
                 <td scope="row">${feature.properties.idmanzana}</td>
-                <td class="fw-bolder"><a
-                        href="/geoportal/?search=${feature.properties.distrito}">${feature.properties.distrito}</a></td>
+                <td class=""><a class="text-decoration-none link-success" href="/geoportal/?search=${feature.properties.distrito}">${feature.properties.distrito}</a></td>
                 <td>${feature.properties.pob_total}</td>
-                <td rowspan="2" class="">${feature.properties.n_riesgo}</td>
+                <td rowspan="2" class="fw-bold align-middle" style="background-color: ${bgColor(feature)}">
+                    ${feature.properties.n_riesgo}</td>
             </tr>
             <tr>
-                <th scope="row" colspan="3"> Centro Poblado:${feature.properties.nom_ccpp}
-                        </th>
-
+                <th scope="row" colspan="3"> Centro Poblado: ${feature.properties.nom_ccpp}</th>
             </tr>
+           
         <tbody>
     </table>
     `;
@@ -163,18 +162,25 @@
             maxWidth: 1000,
 
         });
+
+        function bgColor(feature){
+            switch (feature.properties.n_riesgo) {
+                case 'Muy Alto':
+                    return '#d7191cc2';
+                case 'Alto':
+                    return '#fe9000c2' ;
+                case 'Medio':
+                    return '#ffe900c2';
+                case 'Bajo':
+                    return '#1a9641c2' ;
+            
+                default:
+                    break;
+            }
+        }
         
     }
-    function pop_algo(feature,layer){
-         var popupContent = `ALGO`;
-         layer.bindPopup(popupContent, {
-         maxHeight: 1000,
-         maxWidth: 1000,
-
-         });
-
-    }
-
+    
     // CREATE LAYERPANE
     map.createPane('dist_pane');
     map.getPane('dist_pane').style.zIndex = 400
@@ -472,11 +478,6 @@
             fillOpacity: '0.50'
         })
 
-        // layer.bindPopup(pop_algo(), {
-        // maxHeight: 1000,
-        // maxWidth: 1000,
-
-        // });
         
     }
     
@@ -532,6 +533,11 @@
      })
      .addTo(map);
 
+     L.control.scale({
+         maxWidth: 100,
+         metric: true,
+         imperial: false
+     }).addTo(map)
     
 
 

@@ -1989,18 +1989,28 @@ ol {
 }
 
 .hero-area .hero-text h1 {
-  font-size: 40px;
+  /* font-size: 40px;  */
+  font-size: 38px; 
   font-weight: 700;
   line-height: 55px;
   margin-bottom: 25px;
 }
 
 .hero-area .hero-text h1 span {
-  font-weight: bolder;
+  /* font-weight: bolder; */
+  font-size: 48px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  /* padding: 0 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    #3763EB 25%
+  ); */
 }
 
 .hero-area .hero-text p {
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .hero-area .hero-text .button {
@@ -5162,11 +5172,11 @@ blockquote span {
   color: #3763EB;
 }
 
-.word-change { 
+/* .word-change { 
   font-weight: 600;
   margin: 0px;
   color: #3763EB;
   font-size: 50px;
   /* background-color: #3763EB; */
   
-}
+} */
