@@ -1,13 +1,9 @@
 {% load static %}
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid d-flex">
-        {% if nombre %}
-        <a class="navbar-brand ms-5">
-        <img src="{% static 'assets/images/logo/logo-white.svg' %}" alt=""> | {{nombre}}
+        <a class="navbar-brand ms-3"><img src="{% static 'assets/images/logo/logo-white.svg' %}" alt="" style="height: 25px;">
+            | {{nombre}}
         </a>
-        {% else %}
-        <a class="navbar-brand ms-5"><img src="{% static 'assets/images/logo/logo-white.svg' %}" alt="" >
-        {% endif %}</a>
 
         
         
@@ -29,10 +25,13 @@
             <button class="btn btn-dark" id="btnNavbarSearch" type="submit"><i class="fas fa-search"></i></button>
 
         </form>
+        {% if nombre  %}
         <li class="nav-item">
                 <a class="nav-link text-white" aria-disabled="false"
                 href="/geoportal"><i class="fas fa-arrow-left"></i></a>
-            </li>
+        </li>
+        {% endif %}
+        
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
