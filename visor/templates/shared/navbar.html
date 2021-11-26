@@ -1,8 +1,12 @@
 {% load static %}
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid d-flex">
+        {% if nombre %}
+        <a class="navbar-brand ms-5">
+        <img src="{% static 'assets/images/logo/logo-white.svg' %}" alt=""> | {{nombre}}
+        </a>
+        {% else %}
         <a class="navbar-brand ms-5"><img src="{% static 'assets/images/logo/logo-white.svg' %}" alt="" >
-            {% if nombre %}| {{nombre}}
         {% endif %}</a>
 
         
