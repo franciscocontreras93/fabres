@@ -102,7 +102,7 @@ def getIndex(clases,dq,variable, lgnd, colores=[]):
     
     leyenda = list(set(values))
     leyenda.sort()
-    print(leyenda)
+    # print(leyenda)
 
     tabla = list(zip(clases, manzanas, poblacion, porcentaje, colores,leyenda))
     
@@ -113,7 +113,7 @@ def getIndex(clases,dq,variable, lgnd, colores=[]):
         'total_porcentaje': round(sum(porcentaje),0)
     }
 
-    print(variable, mapIndex['tabla'])
+    # print(variable, mapIndex['tabla'])
     
     return mapIndex
 
@@ -319,14 +319,14 @@ def webmap(request):
 def distIndicadores(request):
     nombre = ''
     query = request.GET.get('search')
-    print(type(query))
+    # print(type(query))
     dq = model.objects.all()
     if query != None:
         dq = dq.filter(
             Q(distrito=query.upper())
             # Q(nom_ccpp=query.upper())
         )
-        print(len(dq))
+        # print(len(dq))
         vh = SumCount(dq, "n_riesgo", 'Muy Alto', 'Sum')
         h = SumCount(dq, "n_riesgo", 'Alto', 'Sum')
         m = SumCount(dq, "n_riesgo", 'Medio', 'Sum')
@@ -339,7 +339,7 @@ def distIndicadores(request):
     m = SumCount(dq, "n_riesgo", 'Medio', 'Sum')
     l = SumCount(dq, "n_riesgo", 'Bajo', 'Sum')
     total = pobTotal(dq)
-    print(total)
+    # print(total)
 
     if len(dq) >= 1:
         return render(request, r'dashboard/indicadores.html', {
