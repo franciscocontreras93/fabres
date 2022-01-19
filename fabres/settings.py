@@ -15,6 +15,7 @@ from pathlib import Path
 import os
 import dj_database_url
 import corsheaders
+from django.core.management.utils import get_random_secret_key
 
 if os.name == 'nt':
     import platform
@@ -45,7 +46,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-d6!_2(nall^+*0pal+et^%dz@pv&r@j&sh_l&3a%fdnv6xx%g#' # ! CAMBIAR POR VARIABLE DE ENTORNO
-SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-d6!_2(nall^+*0pal+et^%dz@pv&r@j&sh_l&3a%fdnv6xx%g#') # ! CAMBIAR POR VARIABLE DE ENTORNO
+# SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-d6!_2(nall^+*0pal+et^%dz@pv&r@j&sh_l&3a%fdnv6xx%g#') # ! CAMBIAR POR VARIABLE DE ENTORNO
+SECRET_KEY = os.environ.get('SECRET_KEY',get_random_secret_key()) # ! CAMBIAR POR VARIABLE DE ENTORNO
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
