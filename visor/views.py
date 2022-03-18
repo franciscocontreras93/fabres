@@ -131,7 +131,7 @@ def index(request):
     })
 
 
-@login_required
+
 def webmap(request):
     vh = 0
     h = 0
@@ -315,7 +315,7 @@ def webmap(request):
 
         })
 
-@login_required
+
 def distIndicadores(request):
     nombre = ''
     query = request.GET.get('search')

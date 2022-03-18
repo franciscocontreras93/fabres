@@ -51,8 +51,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY',get_random_secret_key()) # ! CAMBIAR PO
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-LOCAL = False
+DEBUG = True
+LOCAL = True
 ALLOWED_HOSTS = ['*']
 
 
@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'rest_framework',
     'widget_tweaks',
+    # 'monfero',
     'visor',
     'corsheaders'
 ]
@@ -92,9 +93,12 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            'visor/templates',
-            'templates/dashboard',
-            'homepage/templates'
+            # 'visor/templates',
+            # 'templates/dashboard',
+            # 'homepage/templates',
+            # 'monfero/templates'
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'shared'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
